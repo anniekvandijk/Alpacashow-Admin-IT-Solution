@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alpacashow-Admin-SpecflowTests", "Alpacashow-Admin-SpecflowTests\Alpacashow-Admin-SpecflowTests.csproj", "{1FE55B4B-0A3E-48C6-BAAC-074E69B1F2C1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alpacashow-Admin-IT", "Alpacashow-Admin-IT\Alpacashow-Admin-IT.csproj", "{1FE55B4B-0A3E-48C6-BAAC-074E69B1F2C1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
