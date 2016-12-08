@@ -152,7 +152,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 9
 this.FeatureBackground();
 #line 24
-   testRunner.When("ik key \'Boekel 2017_2017-06-01\' opvraag van webservice \'showevents\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Als ");
+   testRunner.When("ik \'Boekel 2017_2017-06-01\' opvraag van webservice \'showevents\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Als ");
 #line 25
    testRunner.Then("verwacht ik een status \'OK\' met code 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dan ");
 #line hidden
@@ -192,8 +192,8 @@ this.ScenarioSetup(scenarioInfo);
 this.FeatureBackground();
 #line hidden
 #line 47
-   testRunner.When("ik onderstaande wijziging opstuur voor key \'Test 2017_2017-03-01\' naar webservice" +
-                    " \'showevents\'", "{\r\n\"name\": \"Test 2017\",\r\n\"date\": \"2017-03-01\",\r\n\"closeDate\": \"2017-02-15\",\r\n\"loca" +
+   testRunner.When("ik onderstaande wijziging opstuur voor \'Test 2017_2017-03-01\' naar webservice \'sh" +
+                    "owevents\'", "{\r\n\"name\": \"Test 2017\",\r\n\"date\": \"2017-03-01\",\r\n\"closeDate\": \"2017-02-15\",\r\n\"loca" +
                     "tion\": \"Test wijziging locatie\",\r\n\"judge\": \"judge Y\",\r\n\"participants\": [],\r\n\"sho" +
                     "w\": [\r\n {\r\n   \"showType\": \"Haltershow\"\r\n }\r\n]\r\n}", ((TechTalk.SpecFlow.Table)(null)), "Als ");
 #line 63
@@ -213,8 +213,8 @@ this.ScenarioSetup(scenarioInfo);
 #line 9
 this.FeatureBackground();
 #line 66
-   testRunner.When("ik een verwijderverzoek opstuur voor key \'Test 2017_2017-03-01\' naar webservice \'" +
-                    "showevents\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Als ");
+   testRunner.When("ik een verwijderverzoek opstuur voor \'Test 2017_2017-03-01\' naar webservice \'show" +
+                    "events\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Als ");
 #line 67
    testRunner.Then("verwacht ik een status \'OK\' met code 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dan ");
 #line hidden

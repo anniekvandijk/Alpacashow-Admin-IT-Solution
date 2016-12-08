@@ -21,7 +21,7 @@ Scenario: Opvragen van alle showevents
    | Assen 2017  | 2017-05-01 | 2017-04-01     | Assen   | Rob Bettinson | Haltershow, Fleeceshow |
 
 Scenario: Opvragen van een specifiek showevent
-   Als ik key 'Boekel 2017_2017-06-01' opvraag van webservice 'showevents'
+   Als ik 'Boekel 2017_2017-06-01' opvraag van webservice 'showevents'
    Dan verwacht ik een status 'OK' met code 200
 
 Scenario: Nieuw showevent opvoeren
@@ -44,7 +44,7 @@ Scenario: Nieuw showevent opvoeren
 Dan verwacht ik een status 'OK' met code 200
 
 Scenario: Bestaand showevent wijzigen
-   Als ik onderstaande wijziging opstuur voor key 'Test 2017_2017-03-01' naar webservice 'showevents'
+   Als ik onderstaande wijziging opstuur voor 'Test 2017_2017-03-01' naar webservice 'showevents'
    """
 {
   "name": "Test 2017",
@@ -63,5 +63,5 @@ Scenario: Bestaand showevent wijzigen
 Dan verwacht ik een status 'OK' met code 200
 
 Scenario: Bestaande showevent verwijderen
-   Als ik een verwijderverzoek opstuur voor key 'Test 2017_2017-03-01' naar webservice 'showevents'
+   Als ik een verwijderverzoek opstuur voor 'Test 2017_2017-03-01' naar webservice 'showevents'
    Dan verwacht ik een status 'OK' met code 200
