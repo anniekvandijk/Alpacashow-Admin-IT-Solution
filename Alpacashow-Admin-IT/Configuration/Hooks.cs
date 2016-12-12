@@ -14,9 +14,7 @@ namespace Alpacashow_Admin_IT.Configuration
       [BeforeFeature]
       public static void BeforeFeature()
       {
-         //var settings = Environment.Settings.EnvironmentName;
-
-         string url = $"http://localhost:8081/webservice/";
+         var url = AppSettings.getEnvironmentUrl();
          FeatureContext.Current.Add("environment-settings", url);
       }
    }

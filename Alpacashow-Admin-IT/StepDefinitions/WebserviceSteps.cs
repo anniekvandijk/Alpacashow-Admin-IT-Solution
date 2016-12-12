@@ -29,7 +29,7 @@ namespace Alpacashow_Admin_SpecflowTests.StepDefinitions
          ScenarioContext.Current.Add("webservice-response", response);
       }
 
-      [When(@"ik key '(.*)' opvraag van webservice '(.*)'")]
+      [When(@"ik '(.*)' opvraag van webservice '(.*)'")]
       public void AlsIkOpvraagMetKey(string key, string path)
       {
          var settings = FeatureContext.Current["environment-settings"];
@@ -58,7 +58,7 @@ namespace Alpacashow_Admin_SpecflowTests.StepDefinitions
          ScenarioContext.Current.Add("webservice-response", response);
       }
 
-      [When(@"ik onderstaande wijziging opstuur voor key '(.*)' naar webservice '(.*)'")]
+      [When(@"ik onderstaande wijziging opstuur voor '(.*)' naar webservice '(.*)'")]
       public void AlsIkOnderstaandeWijzigingOpstuurVoorKeyNaarWebservice(string key, string path, string multilineText)
       {
          var settings = FeatureContext.Current["environment-settings"];
@@ -73,7 +73,7 @@ namespace Alpacashow_Admin_SpecflowTests.StepDefinitions
          ScenarioContext.Current.Add("webservice-response", response);
       }
 
-      [When(@"ik een verwijderverzoek opstuur voor key '(.*)' naar webservice '(.*)'")]
+      [When(@"ik een verwijderverzoek opstuur voor '(.*)' naar webservice '(.*)'")]
       public void AlsIkEenVerwijderverzoekOpstuurVoorKeyNaarWebservice(string key, string path)
       {
          var settings = FeatureContext.Current["environment-settings"];

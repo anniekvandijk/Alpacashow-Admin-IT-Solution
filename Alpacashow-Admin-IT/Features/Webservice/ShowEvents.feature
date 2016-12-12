@@ -8,17 +8,17 @@ Functionaliteit: Showevents CRUD
 
 Achtergrond: Aanwezige showevents
 	Stel de volgende showevents zijn aanwezig
-   | naam        | datum      | sluitingsdatum | locatie | jury          | show                   |
-   | Boekel 2017 | 2017-06-01 | 2017-05-01     | Boekel  | judge X       | Haltershow             |
-   | Assen 2017  | 2017-05-01 | 2017-04-01     | Assen   | Rob Bettinson | Haltershow, Fleeceshow |
+   | naam        | datum      | sluitingsdatum | locatie | jury          | show                   | 
+   | Boekel 2017 | 2017-06-01 | 2017-05-01     | Boekel  | judge X       | Haltershow             | 
+   | Assen 2017  | 2017-05-01 | 2017-04-01     | Assen   | Rob Bettinson | Haltershow, Fleeceshow | 
 
 Scenario: Opvragen van alle showevents
    Als ik alles opvraag via webservice 'showevents'
    Dan verwacht ik een status 'OK' met code 200
 	Dan verwacht ik de volgende showevents als resultaat
-   | naam        | datum      | sluitingsdatum | locatie | jury          | show                   |
-   | Boekel 2017 | 2017-06-01 | 2017-05-01     | Boekel  | judge X       | Haltershow             |
-   | Assen 2017  | 2017-05-01 | 2017-04-01     | Assen   | Rob Bettinson | Haltershow, Fleeceshow |
+   | naam        | datum      | sluitingsdatum | locatie | jury          | show                   | 
+   | Boekel 2017 | 2017-06-01 | 2017-05-01     | Boekel  | judge X       | Haltershow             | 
+   | Assen 2017  | 2017-05-01 | 2017-04-01     | Assen   | Rob Bettinson | Haltershow, Fleeceshow | 
 
 Scenario: Opvragen van een specifiek showevent
    Als ik 'Boekel 2017_2017-06-01' opvraag van webservice 'showevents'
