@@ -172,8 +172,8 @@ this.FeatureBackground();
 #line hidden
 #line 28
    testRunner.When("ik onderstaande opstuur naar webservice \'showevents\'", "{\r\n\"name\": \"Test 2017\",\r\n\"date\": \"2017-03-01\",\r\n\"closeDate\": \"2017-02-15\",\r\n\"loca" +
-                    "tion\": \"Test\",\r\n\"judge\": \"judge Y\",\r\n\"participants\": [],\r\n\"show\": [\r\n {\r\n   \"sho" +
-                    "wType\": \"Haltershow\"\r\n }\r\n]\r\n}", ((TechTalk.SpecFlow.Table)(null)), "Als ");
+                    "tion\": \"Test\",\r\n\"judge\": \"judge Y\",\r\n\"participants\": [],\r\n\"shows\": [\r\n {\r\n   \"sh" +
+                    "owType\": \"Haltershow\"\r\n }\r\n]\r\n}", ((TechTalk.SpecFlow.Table)(null)), "Als ");
 #line 44
 testRunner.Then("verwacht ik een status \'OK\' met code 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dan ");
 #line hidden
@@ -195,7 +195,7 @@ this.FeatureBackground();
    testRunner.When("ik onderstaande wijziging opstuur voor \'Test 2017_2017-03-01\' naar webservice \'sh" +
                     "owevents\'", "{\r\n\"name\": \"Test 2017\",\r\n\"date\": \"2017-03-01\",\r\n\"closeDate\": \"2017-02-15\",\r\n\"loca" +
                     "tion\": \"Test wijziging locatie\",\r\n\"judge\": \"judge Y\",\r\n\"participants\": [],\r\n\"sho" +
-                    "w\": [\r\n {\r\n   \"showType\": \"Haltershow\"\r\n }\r\n]\r\n}", ((TechTalk.SpecFlow.Table)(null)), "Als ");
+                    "ws\": [\r\n {\r\n   \"showType\": \"Haltershow\"\r\n }\r\n]\r\n}", ((TechTalk.SpecFlow.Table)(null)), "Als ");
 #line 63
 testRunner.Then("verwacht ik een status \'OK\' met code 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dan ");
 #line hidden

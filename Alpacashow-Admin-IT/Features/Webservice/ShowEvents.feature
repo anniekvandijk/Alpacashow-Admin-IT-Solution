@@ -34,7 +34,7 @@ Scenario: Nieuw showevent opvoeren
   "location": "Test",
   "judge": "judge Y",
   "participants": [],
-  "show": [
+  "shows": [
     {
       "showType": "Haltershow"
     }
@@ -53,7 +53,7 @@ Scenario: Bestaand showevent wijzigen
   "location": "Test wijziging locatie",
   "judge": "judge Y",
   "participants": [],
-  "show": [
+  "shows": [
     {
       "showType": "Haltershow"
     }
