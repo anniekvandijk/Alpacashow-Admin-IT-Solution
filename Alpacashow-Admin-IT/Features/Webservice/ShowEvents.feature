@@ -8,17 +8,17 @@ Functionaliteit: Showevents CRUD
 
 Achtergrond: Aanwezige showevents
 	Stel de volgende showevents zijn aanwezig
-   | naam        | datum      | sluitingsdatum | locatie | jury          | show                   | 
-   | Boekel 2017 | 2017-06-01 | 2017-05-01     | Boekel  | judge X       | Haltershow             | 
-   | Assen 2017  | 2017-05-01 | 2017-04-01     | Assen   | Rob Bettinson | Haltershow, Fleeceshow | 
+   | naam        | datum      | sluitingsdatum | locatie | jury          | shows                  | deelnemers |
+   | Assen 2017  | 2017-05-01 | 2017-04-01     | Assen   | Rob Bettinson | Haltershow, Fleeceshow |            |
+   | Boekel 2017 | 2017-06-01 | 2017-05-01     | Boekel  | judge X       | Haltershow             |            |  
 
 Scenario: Opvragen van alle showevents
    Als ik alles opvraag via webservice 'showevents'
    Dan verwacht ik een status 'OK' met code 200
 	Dan verwacht ik de volgende showevents als resultaat
-   | naam        | datum      | sluitingsdatum | locatie | jury          | show                   | 
-   | Boekel 2017 | 2017-06-01 | 2017-05-01     | Boekel  | judge X       | Haltershow             | 
-   | Assen 2017  | 2017-05-01 | 2017-04-01     | Assen   | Rob Bettinson | Haltershow, Fleeceshow | 
+   | naam        | datum      | sluitingsdatum | locatie | jury          | shows                  | deelnemers |
+   | Boekel 2017 | 2017-06-01 | 2017-05-01     | Boekel  | judge X       | Haltershow             |            |
+   | Assen 2017  | 2017-05-01 | 2017-04-01     | Assen   | Rob Bettinson | Haltershow, Fleeceshow |            |             
 
 Scenario: Opvragen van een specifiek showevent
    Als ik 'Boekel 2017_2017-06-01' opvraag van webservice 'showevents'
@@ -43,7 +43,23 @@ Scenario: Nieuw showevent opvoeren
    """
 Dan verwacht ik een status 'OK' met code 200
 
-Scenario: Bestaand showevent wijzigen
+Scenario: Bestaand showevent wijzigen met tabel
+   Als ik onderstaande wijziging stuur voor 'Test 2017_2017-03-01' naar webservice 'showevents'
+   | veld           | waarde                        |
+   | naam           | Test 2017                     |
+   | datum          | 2017-03-01                    |
+   | sluitingsdatum | 2017-02-15                    |
+   | locatie        | Teslocatie                    |
+   | jury           | jury Z                        |
+   | shows          | Haltershow, Male progeny show |
+   | deelnemers     |                               |
+Dan verwacht ik een status 'OK' met code 200
+
+Scenario: Bestaand showevent wijzigen met file
+   Als ik 'wijzigShowEvent' als wijziging stuur voor 'Test 2017_2017-03-01' naar webservice 'showevents'
+   Dan verwacht ik een status 'OK' met code 200
+
+Scenario: Bestaand showevent wijzigen met multiline text
    Als ik onderstaande wijziging opstuur voor 'Test 2017_2017-03-01' naar webservice 'showevents'
    """
 {

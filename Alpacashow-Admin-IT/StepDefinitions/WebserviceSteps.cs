@@ -1,20 +1,20 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Newtonsoft.Json;
 using System;
+using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
+using Alpacashow_Admin_SpecflowTests.Utilities;
 using TechTalk.SpecFlow;
+using TechTalk.SpecFlow.Assist;
 
 namespace Alpacashow_Admin_SpecflowTests.StepDefinitions
 {
     [Binding]
     public class WebserviceSteps
     {
-        [Given(@"de volgende '(.*)' zijn aanwezig")]
-        public void GegevenDeVolgendeShowsZijnAanwezig(String path, Table table)
-        {
-           // ScenarioContext.Current.Pending();
-        }
-        
+
         [When(@"ik alles opvraag via webservice '(.*)'")]
         public void AlsIkAlleShowsOpvraag(String path)
         {
@@ -61,17 +61,34 @@ namespace Alpacashow_Admin_SpecflowTests.StepDefinitions
       [When(@"ik onderstaande wijziging opstuur voor '(.*)' naar webservice '(.*)'")]
       public void AlsIkOnderstaandeWijzigingOpstuurVoorKeyNaarWebservice(string key, string path, string multilineText)
       {
-         var settings = FeatureContext.Current["environment-settings"];
-
-         string url = settings + path + "/" + key;
-
-         var client = new HttpClient();
-         StringContent content = new StringContent(multilineText);
-         client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-         var response = client.PutAsync(url, content).Result;
-
-         ScenarioContext.Current.Add("webservice-response", response);
+         var content = new StringContent(multilineText, Encoding.UTF8, "application/json");
+         SentRequest(key, path, content, "PUT");
       }
+
+       [When(@"ik onderstaande wijziging stuur voor '(.*)' naar webservice '(.*)'")]
+      public void AlsIkOnderstaandeWijzigingStuurVoorNaarWebservice(string key, string path, Table table)
+       {
+
+         string[] newTableHeader = new string[] { "name", "date", "closeDate", "location", "judge", "shows", "participants" };
+         Table convertedTable = TableConverter.ChangeVerticalTableToHorizontalWithNewHeader(table, newTableHeader);
+          Table otherConvert = TableConverter.ChangeVerticalTableIds(table, newTableHeader);
+
+         string JSONString = string.Empty;
+         JSONString = JsonConvert.SerializeObject(table.CreateDynamicInstance());
+         var content = new StringContent(JSONString, Encoding.UTF8, "application/json");
+         SentRequest(key, path, content, "PUT");
+      }
+
+
+
+      [When(@"ik '(.*)' als wijziging stuur voor '(.*)' naar webservice '(.*)'")]
+      public void AlsIkStuurVoorNaarWebservice(string file, string key, string path)
+      {
+         var fileContent = File.ReadAllText($"./Testdata/Input/json/{file}.json");
+         var content = new StringContent(fileContent, Encoding.UTF8, "application/json");
+         SentRequest(key, path, content, "PUT");
+      }
+
 
       [When(@"ik een verwijderverzoek opstuur voor '(.*)' naar webservice '(.*)'")]
       public void AlsIkEenVerwijderverzoekOpstuurVoorKeyNaarWebservice(string key, string path)
@@ -93,6 +110,24 @@ namespace Alpacashow_Admin_SpecflowTests.StepDefinitions
          var result = ScenarioContext.Current["webservice-response"] as HttpResponseMessage;
          Assert.AreEqual(status, result.ReasonPhrase);
          Assert.AreEqual(code, (int)result.StatusCode);
+      }
+
+      private static void SentRequest(string key, string path, StringContent content, string HttpMethod)
+      {
+         var settings = FeatureContext.Current["environment-settings"];
+
+         HttpResponseMessage response = null;
+         if (HttpMethod == "PUT")
+         {
+            string url = settings + path + "/" + key;
+
+            var client = new HttpClient();
+
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            response = client.PutAsync(url, content).Result;
+         }
+
+         ScenarioContext.Current.Add("webservice-response", response);
       }
 
    }

@@ -79,21 +79,24 @@ namespace Alpacashow_Admin_SpecflowTests.Features.Webservice
                         "sluitingsdatum",
                         "locatie",
                         "jury",
-                        "show"});
-            table1.AddRow(new string[] {
-                        "Boekel 2017",
-                        "2017-06-01",
-                        "2017-05-01",
-                        "Boekel",
-                        "judge X",
-                        "Haltershow"});
+                        "shows",
+                        "deelnemers"});
             table1.AddRow(new string[] {
                         "Assen 2017",
                         "2017-05-01",
                         "2017-04-01",
                         "Assen",
                         "Rob Bettinson",
-                        "Haltershow, Fleeceshow"});
+                        "Haltershow, Fleeceshow",
+                        ""});
+            table1.AddRow(new string[] {
+                        "Boekel 2017",
+                        "2017-06-01",
+                        "2017-05-01",
+                        "Boekel",
+                        "judge X",
+                        "Haltershow",
+                        ""});
 #line 10
  testRunner.Given("de volgende showevents zijn aanwezig", ((string)(null)), table1, "Stel ");
 #line hidden
@@ -120,21 +123,24 @@ this.FeatureBackground();
                         "sluitingsdatum",
                         "locatie",
                         "jury",
-                        "show"});
+                        "shows",
+                        "deelnemers"});
             table2.AddRow(new string[] {
                         "Boekel 2017",
                         "2017-06-01",
                         "2017-05-01",
                         "Boekel",
                         "judge X",
-                        "Haltershow"});
+                        "Haltershow",
+                        ""});
             table2.AddRow(new string[] {
                         "Assen 2017",
                         "2017-05-01",
                         "2017-04-01",
                         "Assen",
                         "Rob Bettinson",
-                        "Haltershow, Fleeceshow"});
+                        "Haltershow, Fleeceshow",
+                        ""});
 #line 18
  testRunner.Then("verwacht ik de volgende showevents als resultaat", ((string)(null)), table2, "Dan ");
 #line hidden
@@ -181,22 +187,85 @@ testRunner.Then("verwacht ik een status \'OK\' met code 200", ((string)(null)), 
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Bestaand showevent wijzigen")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Bestaand showevent wijzigen met tabel")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Showevents CRUD")]
-        public virtual void BestaandShoweventWijzigen()
+        public virtual void BestaandShoweventWijzigenMetTabel()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Bestaand showevent wijzigen", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Bestaand showevent wijzigen met tabel", ((string[])(null)));
 #line 46
 this.ScenarioSetup(scenarioInfo);
 #line 9
 this.FeatureBackground();
 #line hidden
+            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+                        "veld",
+                        "waarde"});
+            table3.AddRow(new string[] {
+                        "naam",
+                        "Test 2017"});
+            table3.AddRow(new string[] {
+                        "datum",
+                        "2017-03-01"});
+            table3.AddRow(new string[] {
+                        "sluitingsdatum",
+                        "2017-02-15"});
+            table3.AddRow(new string[] {
+                        "locatie",
+                        "Teslocatie"});
+            table3.AddRow(new string[] {
+                        "jury",
+                        "jury Z"});
+            table3.AddRow(new string[] {
+                        "shows",
+                        "Haltershow, Male progeny show"});
+            table3.AddRow(new string[] {
+                        "deelnemers",
+                        ""});
 #line 47
+   testRunner.When("ik onderstaande wijziging stuur voor \'Test 2017_2017-03-01\' naar webservice \'show" +
+                    "events\'", ((string)(null)), table3, "Als ");
+#line 56
+testRunner.Then("verwacht ik een status \'OK\' met code 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dan ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Bestaand showevent wijzigen met file")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Showevents CRUD")]
+        public virtual void BestaandShoweventWijzigenMetFile()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Bestaand showevent wijzigen met file", ((string[])(null)));
+#line 58
+this.ScenarioSetup(scenarioInfo);
+#line 9
+this.FeatureBackground();
+#line 59
+   testRunner.When("ik \'wijzigShowEvent\' als wijziging stuur voor \'Test 2017_2017-03-01\' naar webserv" +
+                    "ice \'showevents\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Als ");
+#line 60
+   testRunner.Then("verwacht ik een status \'OK\' met code 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dan ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Bestaand showevent wijzigen met multiline text")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Showevents CRUD")]
+        public virtual void BestaandShoweventWijzigenMetMultilineText()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Bestaand showevent wijzigen met multiline text", ((string[])(null)));
+#line 62
+this.ScenarioSetup(scenarioInfo);
+#line 9
+this.FeatureBackground();
+#line hidden
+#line 63
    testRunner.When("ik onderstaande wijziging opstuur voor \'Test 2017_2017-03-01\' naar webservice \'sh" +
                     "owevents\'", "{\r\n\"name\": \"Test 2017\",\r\n\"date\": \"2017-03-01\",\r\n\"closeDate\": \"2017-02-15\",\r\n\"loca" +
                     "tion\": \"Test wijziging locatie\",\r\n\"judge\": \"judge Y\",\r\n\"participants\": [],\r\n\"sho" +
                     "ws\": [\r\n {\r\n   \"showType\": \"Haltershow\"\r\n }\r\n]\r\n}", ((TechTalk.SpecFlow.Table)(null)), "Als ");
-#line 63
+#line 79
 testRunner.Then("verwacht ik een status \'OK\' met code 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dan ");
 #line hidden
             this.ScenarioCleanup();
@@ -208,14 +277,14 @@ testRunner.Then("verwacht ik een status \'OK\' met code 200", ((string)(null)), 
         public virtual void BestaandeShoweventVerwijderen()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Bestaande showevent verwijderen", ((string[])(null)));
-#line 65
+#line 81
 this.ScenarioSetup(scenarioInfo);
 #line 9
 this.FeatureBackground();
-#line 66
+#line 82
    testRunner.When("ik een verwijderverzoek opstuur voor \'Test 2017_2017-03-01\' naar webservice \'show" +
                     "events\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Als ");
-#line 67
+#line 83
    testRunner.Then("verwacht ik een status \'OK\' met code 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dan ");
 #line hidden
             this.ScenarioCleanup();

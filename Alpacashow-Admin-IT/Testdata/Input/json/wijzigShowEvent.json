@@ -1,0 +1,13 @@
+﻿{
+  "name": "Test 2017",
+  "date": "2017-03-01",
+  "closeDate": "2017-01-15",
+  "location": "Test",
+  "judge": "judge Y",
+  "participants": [],
+  "shows": [
+    {
+      "showType": "Haltershow"
+    }
+  ]
+}
