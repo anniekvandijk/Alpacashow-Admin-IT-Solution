@@ -1,10 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ImpromptuInterface.InvokeExt;
 
 namespace Alpacashow_Admin_SpecflowTests.Utilities
 {
+   public enum CompareMethod
+   {
+      ExactMatch,
+      MustAtLeastContainExpectedValues,
+      MustAtLeastContainExpectedRecords,
+      MustAtLeastContainExpectedValuesAndRecords
+   }
+
    public static class ObjectsComparer
    {
       /// <summary>
@@ -13,36 +20,64 @@ namespace Alpacashow_Admin_SpecflowTests.Utilities
       /// <param name="expectedContent">Expected dynamic content.</param>
       /// <param name="actualContent">Actual dynamic content.</param>
       /// <returns>True if List are exact match, else false</returns>
-      public static bool DynamicObjectsComparer(dynamic expectedContent, dynamic actualContent)
+      public static bool CompareDynamicObjects(dynamic expectedContent, dynamic actualContent, CompareMethod compareMethod)
       {
-         var isEqual = false;
-         foreach (dynamic expCont in expectedContent)
+         var equalList = false;
+         // check if content is object
+         var expectedContentIsObject = expectedContent.GetType().Name.Equals("Object") || expectedContent.GetType().Name.Equals("JObject");
+         var actualContentIsObject = actualContent.GetType().Name.Equals("Object") || actualContent.GetType().Name.Equals("JObject");
+
+         if (expectedContentIsObject == true && actualContentIsObject == true)
          {
-            List<KeyValuePair<string, object>> expContentList = ConvertDynamicPairsList(expCont);
-
-            var equalList = false;
-            foreach (dynamic actCont in actualContent)
+            List<KeyValuePair<string, object>> expectedContentList = ConvertDynamicPairsList(expectedContent);
+            List<KeyValuePair<string, object>> actualContentList = ConvertDynamicPairsList(actualContent);
+            equalList = CompareLists(expectedContentList, actualContentList, compareMethod);
+         }
+         if (expectedContentIsObject == false && actualContentIsObject == true)
+         {
+            foreach (var expCont in expectedContent)
             {
-               List<KeyValuePair<string, object>> actContentList = ConvertDynamicPairsList(actCont);
-
-               equalList = expContentList.SequenceEqual(actContentList);
-               if (equalList)
-               {
-                  break;
-               }
-            }
-
-            if (!equalList)
-            {
-               isEqual = false;
-               break;
-            }
-            else
-            {
-               isEqual = true;
+               List<KeyValuePair<string, object>> expectedContentList = ConvertDynamicPairsList(expCont);
+               List<KeyValuePair<string, object>> actualContentList = ConvertDynamicPairsList(actualContent);
+               equalList = CompareLists(expectedContentList, actualContentList, compareMethod);
             }
          }
-         return isEqual;
+         if (expectedContentIsObject == true && actualContentIsObject == false)
+         {
+            List<KeyValuePair<string, object>> expectedContentList = ConvertDynamicPairsList(expectedContent);
+            foreach (var actCont in actualContent)
+            {
+               List<KeyValuePair<string, object>> actualContentList = ConvertDynamicPairsList(actCont);
+               equalList = CompareLists(expectedContentList, actualContentList, compareMethod);
+            }
+         }
+         if (expectedContentIsObject == false && actualContentIsObject == false)
+         {
+            foreach (var expCont in expectedContent)
+            {
+               List<KeyValuePair<string, object>> expectedContentList = ConvertDynamicPairsList(expCont);
+               foreach (var actCont in actualContent)
+               {
+                  List<KeyValuePair<string, object>> actualContentList = ConvertDynamicPairsList(actCont);
+                  equalList = CompareLists(expectedContentList, actualContentList, compareMethod);
+               }
+            }
+         }
+
+         return equalList;
+      }
+
+      private static bool CompareLists(List<KeyValuePair<string, object>> expectedContentList, List<KeyValuePair<string, object>> actualContentList, CompareMethod compareMethod)
+      {
+         var equal = false;
+
+         switch (compareMethod)
+         {
+            case CompareMethod.ExactMatch:
+               equal = expectedContentList.SequenceEqual(actualContentList);
+               break;
+         }
+         return equal;
       }
 
       /// <summary>
@@ -59,20 +94,19 @@ namespace Alpacashow_Admin_SpecflowTests.Utilities
          foreach (var pair in content)
          {
             var keyExists = ((Type)pair.GetType()).GetProperties().Any(p => p.Name.Equals("Key"));
-            var nameExists = ((Type)pair.GetType()).GetProperties().Any(p => p.Name.Equals("Name"));
-            var valueExists = ((Type)pair.GetType()).GetProperties().Any(p => p.Name.Equals("Value"));
+            var nameExists = ((Type) pair.GetType()).GetProperties().Any(p => p.Name.Equals("Name"));
 
-            if (keyExists && valueExists)
+            if (keyExists)
             {
                keyValuePairList.Add(new KeyValuePair<string, object>(pair.Key, pair.Value));
             }
-            else if (nameExists && valueExists)
+            else if (nameExists)
             {
                keyValuePairList.Add(new KeyValuePair<string, object>(pair.Name, pair.Value));
             }
             else
             {
-               throw new Exception("No Key-Value or Name-Value found");
+                  throw new Exception("No Key-Value, Name-Value or Path-Value found");
             }
          }
 

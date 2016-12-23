@@ -122,25 +122,13 @@ this.FeatureBackground();
                         "datum",
                         "sluitingsdatum",
                         "locatie",
-                        "jury",
-                        "shows",
-                        "deelnemers"});
+                        "jury"});
             table2.AddRow(new string[] {
                         "Boekel 2017",
                         "2017-06-01",
                         "2017-05-01",
                         "Boekel",
-                        "judge X",
-                        "Haltershow",
-                        ""});
-            table2.AddRow(new string[] {
-                        "Assen 2017",
-                        "2017-05-01",
-                        "2017-04-01",
-                        "Assen",
-                        "Rob Bettinson",
-                        "Haltershow, Fleeceshow",
-                        ""});
+                        "judge X"});
 #line 18
  testRunner.Then("verwacht ik de volgende showevents als resultaat", ((string)(null)), table2, "Dan ");
 #line hidden
@@ -216,15 +204,18 @@ this.FeatureBackground();
                         "jury",
                         "jury Z"});
             table3.AddRow(new string[] {
-                        "shows",
-                        "Haltershow, Male progeny show"});
+                        "shows.showtype",
+                        "Haltershow"});
+            table3.AddRow(new string[] {
+                        "shows.showtype",
+                        "Male progeny show"});
             table3.AddRow(new string[] {
                         "deelnemers",
                         ""});
 #line 47
    testRunner.When("ik onderstaande wijziging stuur voor \'Test 2017_2017-03-01\' naar webservice \'show" +
                     "events\'", ((string)(null)), table3, "Als ");
-#line 56
+#line 57
 testRunner.Then("verwacht ik een status \'OK\' met code 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dan ");
 #line hidden
             this.ScenarioCleanup();
@@ -236,14 +227,14 @@ testRunner.Then("verwacht ik een status \'OK\' met code 200", ((string)(null)), 
         public virtual void BestaandShoweventWijzigenMetFile()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Bestaand showevent wijzigen met file", ((string[])(null)));
-#line 58
+#line 59
 this.ScenarioSetup(scenarioInfo);
 #line 9
 this.FeatureBackground();
-#line 59
+#line 60
    testRunner.When("ik \'wijzigShowEvent\' als wijziging stuur voor \'Test 2017_2017-03-01\' naar webserv" +
                     "ice \'showevents\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Als ");
-#line 60
+#line 61
    testRunner.Then("verwacht ik een status \'OK\' met code 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dan ");
 #line hidden
             this.ScenarioCleanup();
@@ -255,17 +246,17 @@ this.FeatureBackground();
         public virtual void BestaandShoweventWijzigenMetMultilineText()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Bestaand showevent wijzigen met multiline text", ((string[])(null)));
-#line 62
+#line 63
 this.ScenarioSetup(scenarioInfo);
 #line 9
 this.FeatureBackground();
 #line hidden
-#line 63
+#line 64
    testRunner.When("ik onderstaande wijziging opstuur voor \'Test 2017_2017-03-01\' naar webservice \'sh" +
                     "owevents\'", "{\r\n\"name\": \"Test 2017\",\r\n\"date\": \"2017-03-01\",\r\n\"closeDate\": \"2017-02-15\",\r\n\"loca" +
                     "tion\": \"Test wijziging locatie\",\r\n\"judge\": \"judge Y\",\r\n\"participants\": [],\r\n\"sho" +
                     "ws\": [\r\n {\r\n   \"showType\": \"Haltershow\"\r\n }\r\n]\r\n}", ((TechTalk.SpecFlow.Table)(null)), "Als ");
-#line 79
+#line 80
 testRunner.Then("verwacht ik een status \'OK\' met code 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dan ");
 #line hidden
             this.ScenarioCleanup();
@@ -277,14 +268,14 @@ testRunner.Then("verwacht ik een status \'OK\' met code 200", ((string)(null)), 
         public virtual void BestaandeShoweventVerwijderen()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Bestaande showevent verwijderen", ((string[])(null)));
-#line 81
+#line 82
 this.ScenarioSetup(scenarioInfo);
 #line 9
 this.FeatureBackground();
-#line 82
+#line 83
    testRunner.When("ik een verwijderverzoek opstuur voor \'Test 2017_2017-03-01\' naar webservice \'show" +
                     "events\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Als ");
-#line 83
+#line 84
    testRunner.Then("verwacht ik een status \'OK\' met code 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dan ");
 #line hidden
             this.ScenarioCleanup();
