@@ -112,22 +112,41 @@ namespace Alpacashow_Admin_SpecflowTests.StepDefinitions
          Assert.AreEqual(code, (int)result.StatusCode);
       }
 
-      private static void SentRequest(string key, string path, StringContent content, string HttpMethod)
-      {
-         var settings = FeatureContext.Current["environment-settings"];
+       private static void SentRequest(string key, string path, StringContent content, string HttpMethod)
+       {
+          var settings = FeatureContext.Current["environment-settings"];
+          HttpResponseMessage response = null;
+          var client = new HttpClient();
+          client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-         HttpResponseMessage response = null;
-         if (HttpMethod == "PUT")
-         {
-            string url = settings + path + "/" + key;
+          string url;
+          if (key.Equals(string.Empty))
+          {
+             url = settings + path;
+          }
+          else
+          {
+             url = settings + path + "/" + key;
+          }
 
-            var client = new HttpClient();
-
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            response = client.PutAsync(url, content).Result;
+          if (HttpMethod == "PUT")
+          {
+             response = client.PutAsync(url, content).Result;
+          }
+          if (HttpMethod == "POST")
+          {
+             response = client.PostAsync(url, content).Result;
+          }
+          if (HttpMethod == "GET")
+          { 
+            response = client.GetAsync(url).Result;
+          }
+          if (HttpMethod == "DELETE")
+          {
+            response = client.DeleteAsync(url).Result;
          }
 
-         ScenarioContext.Current.Add("webservice-response", response);
+       ScenarioContext.Current.Add("webservice-response", response);
       }
 
    }
