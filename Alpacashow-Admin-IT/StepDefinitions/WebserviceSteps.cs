@@ -1,13 +1,16 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using Alpacashow_Admin_SpecflowTests.Utilities;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
+using TechTalk.SpecFlow.UnitTestProvider;
 
 namespace Alpacashow_Admin_SpecflowTests.StepDefinitions
 {
@@ -30,7 +33,7 @@ namespace Alpacashow_Admin_SpecflowTests.StepDefinitions
       [When(@"ik onderstaande opstuur naar webservice '(.*)'")]
       public void AlsIkDeVolgendeOpvoer(string path, string multilineText)
       {
-         StringContent content = new StringContent(multilineText);
+         StringContent content = new StringContent(multilineText, Encoding.UTF8, "application/json");
          SentRequest(string.Empty, path, content, "POST");
       }
 
@@ -44,14 +47,8 @@ namespace Alpacashow_Admin_SpecflowTests.StepDefinitions
       [When(@"ik onderstaande wijziging stuur voor '(.*)' naar webservice '(.*)'")]
       public void AlsIkOnderstaandeWijzigingStuurVoorNaarWebservice(string key, string path, Table table)
        {
-
-         string[] newTableHeader = new string[] { "name", "date", "closeDate", "location", "judge", "shows", "participants" };
-         Table convertedTable = TableConverter.ChangeVerticalTableToHorizontalWithNewHeader(table, newTableHeader);
-          Table otherConvert = TableConverter.ChangeVerticalTableIds(table, newTableHeader);
-
-         string JSONString = string.Empty;
-         JSONString = JsonConvert.SerializeObject(table.CreateDynamicInstance());
-         var content = new StringContent(JSONString, Encoding.UTF8, "application/json");
+         var JsonString = TableConverter.VerticalTableToJson(table);
+         var content = new StringContent(JsonString, Encoding.UTF8, "application/json");
          SentRequest(key, path, content, "PUT");
       }
 
@@ -73,8 +70,8 @@ namespace Alpacashow_Admin_SpecflowTests.StepDefinitions
       public void DanVerwachtIkEenStatuscodeMetResponsemessage(string status, int code)
       {
          var result = ScenarioContext.Current["webservice-response"] as HttpResponseMessage;
-         Assert.AreEqual(status, result.ReasonPhrase);
-         Assert.AreEqual(code, (int)result.StatusCode);
+         Assert.AreEqual(status, result.ReasonPhrase, "Status verwacht: '" + status + "' maar was: '" + result.ReasonPhrase + "'.");
+         Assert.AreEqual(code, (int)result.StatusCode, "Statuscode verwacht: '" + code + "' maar was: '" + (int)result.StatusCode + "'.");
       }
 
        private static void SentRequest(string key, string path, StringContent content, string HttpMethod)
@@ -111,7 +108,12 @@ namespace Alpacashow_Admin_SpecflowTests.StepDefinitions
             response = client.DeleteAsync(url).Result;
          }
 
-       ScenarioContext.Current.Add("webservice-response", response);
+         object existingResponse;
+         if (ScenarioContext.Current.TryGetValue("webservice-response", out existingResponse))
+         {
+            ScenarioContext.Current.Remove("webservice-response");
+         }
+         ScenarioContext.Current.Add("webservice-response", response);
       }
 
    }

@@ -21,7 +21,8 @@ namespace Alpacashow_Admin_SpecflowTests.Utilities
       /// <param name="actualContent">Actual dynamic content.</param>
       /// <returns>True if List are exact match, else false</returns>
       public static bool CompareDynamicObjects(dynamic expectedContent, dynamic actualContent, CompareMethod compareMethod)
-      {
+      { 
+
          var equalList = false;
          foreach (var expCont in expectedContent)
          {
@@ -43,10 +44,10 @@ namespace Alpacashow_Admin_SpecflowTests.Utilities
       /// </remarks>
       /// <param name="Content">Dynamic content.</param>
       /// <returns>Asending sorted List of Key-Value pairs.</returns>
-      private static List<KeyValuePair<string, object>> ConvertDynamicPairsList(dynamic content)
+      private static List<KeyValuePair<string, object>> ConvertDynamicPairsList(dynamic subcontent)
       {
          var keyValuePairList = new List<KeyValuePair<string, object>>();
-         foreach (dynamic pair in content)
+         foreach (dynamic pair in subcontent)
          {
             var keyExists = ((Type)pair.GetType()).GetProperties().Any(p => p.Name.Equals("Key"));
 
@@ -86,23 +87,7 @@ namespace Alpacashow_Admin_SpecflowTests.Utilities
 
       private static bool ExactMatchOfKeyValueComparer(List<KeyValuePair<string, object>> expectedContentList, List<KeyValuePair<string, object>> actualContentList, bool equal)
       {
-         foreach (var a in expectedContentList)
-         {
-            foreach (var b in actualContentList)
-            {
-               var equalKey = string.Equals(a.Key, b.Key);
-               var equalValue = string.Equals(a.Value, b.Value);
-               if (equalKey && equalValue)
-               {
-                  equal = true;
-               }
-               else
-               {
-                  equal = false;
-               }
-            }
-         }
-         return equal;
+         return expectedContentList.SequenceEqual(actualContentList);
       }
 
       private static bool ExactMatchOfKeyComparer(List<KeyValuePair<string, object>> expectedContentList, List<KeyValuePair<string, object>> actualContentList, bool equal)
@@ -132,7 +117,8 @@ namespace Alpacashow_Admin_SpecflowTests.Utilities
             foreach (var b in actualContentList)
             {
                var equalKey = string.Equals(a.Key, b.Key);
-               if (equalKey)
+               var equalValue = string.Equals(a.Value, b.Value);
+               if (equalKey && equalValue)
                {
                   equal = true;
                }

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using Dynamitey.DynamicObjects;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 
@@ -77,6 +79,66 @@ namespace Alpacashow_Admin_SpecflowTests.Utilities
             convertedTable.AddRow(row.Values.ToArray()); 
          }
          return convertedTable;
+      }
+
+      public static string VerticalTableToJson(Table tableToChange)
+      {
+         StringBuilder builder = new StringBuilder();
+         List<string> list = new List<string>();
+         foreach (var row in tableToChange.Rows)
+         {
+            if (row[0].Contains('.'))
+            {
+               var splitter = row[0].Split('.');
+               if (list.Count == 0)
+               {
+                  if (builder.Length != 0)
+                  {
+                     builder.Append(',').Append(Environment.NewLine);
+                  }
+                  builder.Append('"').Append(splitter[0]).Append('"').Append(':');
+                  builder.Append('[').Append(Environment.NewLine).Append('{')
+                     .Append('"').Append(splitter[1]).Append('"').Append(':')
+                     .Append('"').Append(row[1]).Append('"')
+                     .Append('}').Append(Environment.NewLine);
+                  list.Add(row[1]);
+               }
+               else
+               {
+                  builder.Append(',').Append('{')
+                     .Append('"').Append(splitter[1]).Append('"').Append(':')
+                     .Append('"').Append(row[1]).Append('"').Append('}').Append(Environment.NewLine);
+                  list.Add(row[1]);
+               }
+            }
+            else
+            {
+               if (builder.Length == 0)
+               {
+                  builder.Append("{").Append(Environment.NewLine);
+                  builder.Append('"').Append(row[0]).Append('"').Append(':')
+                     .Append('"').Append(row[1]).Append('"');
+               }
+               else
+               {
+                  if (list.Count != 0)
+                  {
+                     builder.Append(']');
+                     list.Clear();
+                  }
+                  builder.Append(',').Append(Environment.NewLine);
+                  builder.Append('"').Append(row[0]).Append('"').Append(':')
+                     .Append('"').Append(row[1]).Append('"');
+               }
+            }
+         }
+         if (list.Count != 0)
+         {
+            builder.Append(']');
+            list.Clear();
+         }
+         builder.Append("}");
+         return builder.ToString();
       }
    }
 }
