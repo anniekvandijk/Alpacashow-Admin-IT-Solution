@@ -74,13 +74,13 @@ namespace Alpacashow_Admin_SpecflowTests.Features.Webservice
 #line 9
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
-                        "naam",
-                        "datum",
-                        "sluitingsdatum",
-                        "locatie",
-                        "jury",
+                        "name",
+                        "date",
+                        "closeDate",
+                        "location",
+                        "judge",
                         "shows",
-                        "deelnemers"});
+                        "participants"});
             table1.AddRow(new string[] {
                         "Assen 2017",
                         "2017-05-01",
@@ -118,13 +118,13 @@ this.FeatureBackground();
    testRunner.Then("verwacht ik een status \'OK\' met code 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dan ");
 #line hidden
             TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
-                        "naam",
-                        "datum",
-                        "sluitingsdatum",
-                        "locatie",
-                        "jury",
+                        "name",
+                        "date",
+                        "closeDate",
+                        "location",
+                        "judge",
                         "shows",
-                        "deelnemers"});
+                        "participants"});
             table2.AddRow(new string[] {
                         "Boekel 2017",
                         "2017-06-01",
@@ -163,13 +163,13 @@ this.FeatureBackground();
    testRunner.Then("verwacht ik een status \'OK\' met code 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dan ");
 #line hidden
             TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
-                        "naam",
-                        "datum",
-                        "sluitingsdatum",
-                        "locatie",
-                        "jury",
+                        "name",
+                        "date",
+                        "closeDate",
+                        "location",
+                        "judge",
                         "shows",
-                        "deelnemers"});
+                        "participants"});
             table3.AddRow(new string[] {
                         "Boekel 2017",
                         "2017-06-01",
@@ -205,13 +205,13 @@ this.FeatureBackground();
    testRunner.When("ik alles opvraag via webservice \'showevents\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Als ");
 #line hidden
             TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
-                        "naam",
-                        "datum",
-                        "sluitingsdatum",
-                        "locatie",
-                        "jury",
+                        "name",
+                        "date",
+                        "closeDate",
+                        "location",
+                        "judge",
                         "shows",
-                        "deelnemers"});
+                        "participants"});
             table4.AddRow(new string[] {
                         "Assen 2017",
                         "2017-05-01",
@@ -258,13 +258,13 @@ this.FeatureBackground();
    testRunner.Then("verwacht ik een status \'OK\' met code 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dan ");
 #line hidden
             TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
-                        "naam",
-                        "datum",
-                        "sluitingsdatum",
-                        "locatie",
-                        "jury",
+                        "name",
+                        "date",
+                        "closeDate",
+                        "location",
+                        "judge",
                         "shows",
-                        "deelnemers"});
+                        "participants"});
             table5.AddRow(new string[] {
                         "Test 2017",
                         "2017-03-01",
@@ -288,57 +288,129 @@ this.FeatureBackground();
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Opvragen van exact alle showevents met bepaalde waarde")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Showevents CRUD")]
+        public virtual void OpvragenVanExactAlleShoweventsMetBepaaldeWaarde()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Opvragen van exact alle showevents met bepaalde waarde", ((string[])(null)));
+#line 64
+this.ScenarioSetup(scenarioInfo);
+#line 9
+this.FeatureBackground();
+#line 65
+   testRunner.When("ik alles opvraag via webservice \'showevents\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Als ");
+#line 66
+   testRunner.Then("verwacht ik een status \'OK\' met code 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dan ");
+#line hidden
+            TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
+                        "name",
+                        "date",
+                        "closeDate",
+                        "location"});
+            table6.AddRow(new string[] {
+                        "Test 2017",
+                        "2017-03-01",
+                        "2017-02-15",
+                        "Test"});
+            table6.AddRow(new string[] {
+                        "Assen 2017",
+                        "2017-05-01",
+                        "2017-04-01",
+                        "Assen"});
+            table6.AddRow(new string[] {
+                        "Boekel 2017",
+                        "2017-06-01",
+                        "2017-05-01",
+                        "Boekel"});
+#line 67
+ testRunner.And("verwacht ik de volgende gegevens van showevents als resultaat", ((string)(null)), table6, "En ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Opvragen van alle showevents met bepaalde waarde")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Showevents CRUD")]
+        public virtual void OpvragenVanAlleShoweventsMetBepaaldeWaarde()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Opvragen van alle showevents met bepaalde waarde", ((string[])(null)));
+#line 73
+this.ScenarioSetup(scenarioInfo);
+#line 9
+this.FeatureBackground();
+#line 74
+   testRunner.When("ik alles opvraag via webservice \'showevents\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Als ");
+#line 75
+   testRunner.Then("verwacht ik een status \'OK\' met code 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dan ");
+#line hidden
+            TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
+                        "location",
+                        "judge",
+                        "shows",
+                        "participants"});
+            table7.AddRow(new string[] {
+                        "Assen",
+                        "Rob Bettinson",
+                        "Haltershow, Fleeceshow",
+                        ""});
+#line 76
+ testRunner.And("verwacht ik in ieder geval de volgende gegevens van showevents als resultaat", ((string)(null)), table7, "En ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Bestaand showevent wijzigen met tabel")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Showevents CRUD")]
         public virtual void BestaandShoweventWijzigenMetTabel()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Bestaand showevent wijzigen met tabel", ((string[])(null)));
-#line 64
+#line 80
 this.ScenarioSetup(scenarioInfo);
 #line 9
 this.FeatureBackground();
 #line hidden
-            TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
                         "parameter",
                         "value"});
-            table6.AddRow(new string[] {
+            table8.AddRow(new string[] {
                         "name",
                         "Test 2017"});
-            table6.AddRow(new string[] {
+            table8.AddRow(new string[] {
                         "date",
                         "2017-03-01"});
-            table6.AddRow(new string[] {
+            table8.AddRow(new string[] {
                         "closeDate",
                         "2017-02-15"});
-            table6.AddRow(new string[] {
+            table8.AddRow(new string[] {
                         "location",
                         "Teslocatie"});
-            table6.AddRow(new string[] {
+            table8.AddRow(new string[] {
                         "judge",
                         "jury Z"});
-            table6.AddRow(new string[] {
+            table8.AddRow(new string[] {
                         "shows.showType",
                         "Haltershow"});
-            table6.AddRow(new string[] {
+            table8.AddRow(new string[] {
                         "shows.showType",
                         "Male progeny show"});
-#line 65
+#line 81
    testRunner.When("ik onderstaande wijziging stuur voor \'Test 2017_2017-03-01\' naar webservice \'show" +
-                    "events\'", ((string)(null)), table6, "Als ");
-#line 74
+                    "events\'", ((string)(null)), table8, "Als ");
+#line 90
    testRunner.Then("verwacht ik een status \'OK\' met code 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dan ");
-#line 75
+#line 91
    testRunner.When("ik alles opvraag via webservice \'showevents\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Als ");
 #line hidden
-            TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
-                        "naam",
-                        "datum",
-                        "sluitingsdatum",
-                        "locatie",
-                        "jury",
+            TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
+                        "name",
+                        "date",
+                        "closeDate",
+                        "location",
+                        "judge",
                         "shows",
-                        "deelnemers"});
-            table7.AddRow(new string[] {
+                        "participants"});
+            table9.AddRow(new string[] {
                         "Assen 2017",
                         "2017-05-01",
                         "2017-04-01",
@@ -346,7 +418,7 @@ this.FeatureBackground();
                         "Rob Bettinson",
                         "Haltershow, Fleeceshow",
                         ""});
-            table7.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "Boekel 2017",
                         "2017-06-01",
                         "2017-05-01",
@@ -354,7 +426,7 @@ this.FeatureBackground();
                         "judge X",
                         "Haltershow",
                         ""});
-            table7.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "Test 2017",
                         "2017-03-01",
                         "2017-02-15",
@@ -362,8 +434,8 @@ this.FeatureBackground();
                         "jury Z",
                         "Haltershow, Male progeny show",
                         ""});
-#line 76
- testRunner.Then("verwacht ik de volgende showevents als resultaat", ((string)(null)), table7, "Dan ");
+#line 92
+ testRunner.Then("verwacht ik de volgende showevents als resultaat", ((string)(null)), table9, "Dan ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -374,27 +446,27 @@ this.FeatureBackground();
         public virtual void BestaandShoweventWijzigenMetFile()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Bestaand showevent wijzigen met file", ((string[])(null)));
-#line 83
+#line 99
 this.ScenarioSetup(scenarioInfo);
 #line 9
 this.FeatureBackground();
-#line 84
+#line 100
    testRunner.When("ik \'wijzigShowEvent\' als wijziging stuur voor \'Test 2017_2017-03-01\' naar webserv" +
                     "ice \'showevents\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Als ");
-#line 85
+#line 101
    testRunner.Then("verwacht ik een status \'OK\' met code 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dan ");
-#line 86
+#line 102
    testRunner.When("ik alles opvraag via webservice \'showevents\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Als ");
 #line hidden
-            TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
-                        "naam",
-                        "datum",
-                        "sluitingsdatum",
-                        "locatie",
-                        "jury",
+            TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
+                        "name",
+                        "date",
+                        "closeDate",
+                        "location",
+                        "judge",
                         "shows",
-                        "deelnemers"});
-            table8.AddRow(new string[] {
+                        "participants"});
+            table10.AddRow(new string[] {
                         "Assen 2017",
                         "2017-05-01",
                         "2017-04-01",
@@ -402,7 +474,7 @@ this.FeatureBackground();
                         "Rob Bettinson",
                         "Haltershow, Fleeceshow",
                         ""});
-            table8.AddRow(new string[] {
+            table10.AddRow(new string[] {
                         "Boekel 2017",
                         "2017-06-01",
                         "2017-05-01",
@@ -410,7 +482,7 @@ this.FeatureBackground();
                         "judge X",
                         "Haltershow",
                         ""});
-            table8.AddRow(new string[] {
+            table10.AddRow(new string[] {
                         "Test 2017",
                         "2017-03-01",
                         "2017-01-15",
@@ -418,8 +490,8 @@ this.FeatureBackground();
                         "judge Y",
                         "Haltershow",
                         ""});
-#line 87
- testRunner.Then("verwacht ik de volgende showevents als resultaat", ((string)(null)), table8, "Dan ");
+#line 103
+ testRunner.Then("verwacht ik de volgende showevents als resultaat", ((string)(null)), table10, "Dan ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -430,30 +502,30 @@ this.FeatureBackground();
         public virtual void BestaandShoweventWijzigenMetMultilineText()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Bestaand showevent wijzigen met multiline text", ((string[])(null)));
-#line 93
+#line 109
 this.ScenarioSetup(scenarioInfo);
 #line 9
 this.FeatureBackground();
 #line hidden
-#line 94
+#line 110
    testRunner.When("ik onderstaande wijziging opstuur voor \'Test 2017_2017-03-01\' naar webservice \'sh" +
                     "owevents\'", "{\r\n\"name\": \"Test 2017\",\r\n\"date\": \"2017-03-01\",\r\n\"closeDate\": \"2017-02-15\",\r\n\"loca" +
                     "tion\": \"Test wijziging locatie\",\r\n\"judge\": \"judge Y\",\r\n\"participants\": [],\r\n\"sho" +
                     "ws\": [\r\n {\r\n   \"showType\": \"Haltershow\"\r\n }\r\n]\r\n}", ((TechTalk.SpecFlow.Table)(null)), "Als ");
-#line 110
+#line 126
    testRunner.Then("verwacht ik een status \'OK\' met code 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dan ");
-#line 111
+#line 127
    testRunner.When("ik alles opvraag via webservice \'showevents\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Als ");
 #line hidden
-            TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
-                        "naam",
-                        "datum",
-                        "sluitingsdatum",
-                        "locatie",
-                        "jury",
+            TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
+                        "name",
+                        "date",
+                        "closeDate",
+                        "location",
+                        "judge",
                         "shows",
-                        "deelnemers"});
-            table9.AddRow(new string[] {
+                        "participants"});
+            table11.AddRow(new string[] {
                         "Assen 2017",
                         "2017-05-01",
                         "2017-04-01",
@@ -461,7 +533,7 @@ this.FeatureBackground();
                         "Rob Bettinson",
                         "Haltershow, Fleeceshow",
                         ""});
-            table9.AddRow(new string[] {
+            table11.AddRow(new string[] {
                         "Boekel 2017",
                         "2017-06-01",
                         "2017-05-01",
@@ -469,7 +541,7 @@ this.FeatureBackground();
                         "judge X",
                         "Haltershow",
                         ""});
-            table9.AddRow(new string[] {
+            table11.AddRow(new string[] {
                         "Test 2017",
                         "2017-03-01",
                         "2017-02-15",
@@ -477,8 +549,8 @@ this.FeatureBackground();
                         "judge Y",
                         "Haltershow",
                         ""});
-#line 112
- testRunner.Then("verwacht ik de volgende showevents als resultaat", ((string)(null)), table9, "Dan ");
+#line 128
+ testRunner.Then("verwacht ik de volgende showevents als resultaat", ((string)(null)), table11, "Dan ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -489,27 +561,27 @@ this.FeatureBackground();
         public virtual void BestaandeShoweventVerwijderen()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Bestaande showevent verwijderen", ((string[])(null)));
-#line 118
+#line 134
 this.ScenarioSetup(scenarioInfo);
 #line 9
 this.FeatureBackground();
-#line 119
+#line 135
    testRunner.When("ik een verwijderverzoek opstuur voor \'Test 2017_2017-03-01\' naar webservice \'show" +
                     "events\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Als ");
-#line 120
+#line 136
    testRunner.Then("verwacht ik een status \'OK\' met code 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dan ");
-#line 121
+#line 137
    testRunner.When("ik alles opvraag via webservice \'showevents\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Als ");
 #line hidden
-            TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
-                        "naam",
-                        "datum",
-                        "sluitingsdatum",
-                        "locatie",
-                        "jury",
+            TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
+                        "name",
+                        "date",
+                        "closeDate",
+                        "location",
+                        "judge",
                         "shows",
-                        "deelnemers"});
-            table10.AddRow(new string[] {
+                        "participants"});
+            table12.AddRow(new string[] {
                         "Assen 2017",
                         "2017-05-01",
                         "2017-04-01",
@@ -517,7 +589,7 @@ this.FeatureBackground();
                         "Rob Bettinson",
                         "Haltershow, Fleeceshow",
                         ""});
-            table10.AddRow(new string[] {
+            table12.AddRow(new string[] {
                         "Boekel 2017",
                         "2017-06-01",
                         "2017-05-01",
@@ -525,8 +597,8 @@ this.FeatureBackground();
                         "judge X",
                         "Haltershow",
                         ""});
-#line 122
- testRunner.Then("verwacht ik de volgende showevents als resultaat", ((string)(null)), table10, "Dan ");
+#line 138
+ testRunner.Then("verwacht ik de volgende showevents als resultaat", ((string)(null)), table12, "Dan ");
 #line hidden
             this.ScenarioCleanup();
         }

@@ -10,20 +10,23 @@ namespace Alpacashow_Admin_SpecflowTests.Utilities
    {
       ExactMatch,  // All Objects must be there with the same key-value pairs.
       MustContainExpected, // At least de expected objects must be there with the same key-value pairs.
-      MustContainKeys,
+      ExactMatchOfExpectedValues, // All Objects must be there with the key-value pairs expected.
+      MustContainExpectedValues // At least de expected objects must be there with the key-value pairs expected.
    }
 
    public static class DynamicObjectsComparer
    {
       private static List<List<KeyValuePair<string, object>>> sortedExpectedContentList;
       private static List<List<KeyValuePair<string, object>>> sortedActualContentList;
+
       /// <summary>
       /// This Class takes 2 dynamic objects to compair.
       /// </summary>
       /// <param name="expectedContent">Expected dynamic content.</param>
       /// <param name="actualContent">Actual dynamic content.</param>
       /// <returns>True or false</returns>
-      public static bool CompareDynamicObjects(dynamic expectedContent, dynamic actualContent, CompareMethod compareMethod)
+      public static bool CompareDynamicObjects(dynamic expectedContent, dynamic actualContent,
+         CompareMethod compareMethod)
       {
          sortedExpectedContentList = SortContentList(expectedContent);
          sortedActualContentList = SortContentList(actualContent);
@@ -37,7 +40,12 @@ namespace Alpacashow_Admin_SpecflowTests.Utilities
             case CompareMethod.MustContainExpected:
                equalList = MustContainExpected(sortedExpectedContentList, sortedActualContentList);
                break;
-
+            case CompareMethod.ExactMatchOfExpectedValues:
+               equalList = ExactMatchOfExpectedValues(sortedExpectedContentList, sortedActualContentList);
+               break;
+            case CompareMethod.MustContainExpectedValues:
+               equalList = MustContainExpectedValues(sortedExpectedContentList, sortedActualContentList);
+               break;
          }
          return equalList;
       }
@@ -70,7 +78,7 @@ namespace Alpacashow_Admin_SpecflowTests.Utilities
          var keyValuePairList = new List<KeyValuePair<string, object>>();
          foreach (dynamic pair in subcontent)
          {
-            var keyExists = ((Type)pair.GetType()).GetProperties().Any(p => p.Name.Equals("Key"));
+            var keyExists = ((Type) pair.GetType()).GetProperties().Any(p => p.Name.Equals("Key"));
 
             if (keyExists)
             {
@@ -110,7 +118,7 @@ namespace Alpacashow_Admin_SpecflowTests.Utilities
       }
 
       private static bool MustContainExpected(List<List<KeyValuePair<string, object>>> expectedContentList,
-   List<List<KeyValuePair<string, object>>> actualContentList)
+         List<List<KeyValuePair<string, object>>> actualContentList)
       {
          var equalList = false;
          foreach (var expContent in expectedContentList)
@@ -125,6 +133,40 @@ namespace Alpacashow_Admin_SpecflowTests.Utilities
             }
          }
 
+         return equalList;
+      }
+
+      private static bool ExactMatchOfExpectedValues(List<List<KeyValuePair<string, object>>> expectedContentList,
+         List<List<KeyValuePair<string, object>>> actualContentList)
+      {
+         var equalList = false;
+         if (expectedContentList.Count != actualContentList.Count)
+         {
+            equalList = false;
+         }
+         else
+         {
+            for (int x = 0; x < expectedContentList.Count; x++)
+            {
+               actualContentList[x].RemoveAll(item => !expectedContentList[x].Contains(item));
+            }
+            for (int x = 0; x < expectedContentList.Count; x++)
+            {
+               equalList = expectedContentList[x].SequenceEqual(actualContentList[x]);
+               if (!equalList)
+               {
+                  equalList = false;
+                  break;
+               }
+            }           
+         }
+         return equalList;
+      }
+
+      private static bool MustContainExpectedValues(List<List<KeyValuePair<string, object>>> expectedContentList,
+         List<List<KeyValuePair<string, object>>> actualContentList)
+      {
+         var equalList = false;
          return equalList;
       }
 

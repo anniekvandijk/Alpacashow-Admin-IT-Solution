@@ -8,25 +8,25 @@ Functionaliteit: Showevents CRUD
 
 Achtergrond: Aanwezige showevents
 	Stel de volgende showevents zijn aanwezig
-   | naam        | datum      | sluitingsdatum | locatie | jury          | shows                  | deelnemers |
-   | Assen 2017  | 2017-05-01 | 2017-04-01     | Assen   | Rob Bettinson | Haltershow, Fleeceshow |            |
-   | Boekel 2017 | 2017-06-01 | 2017-05-01     | Boekel  | judge X       | Haltershow             |            |  
+   | name        | date       | closeDate  | location | judge         | shows                  | participants |
+   | Assen 2017  | 2017-05-01 | 2017-04-01 | Assen    | Rob Bettinson | Haltershow, Fleeceshow |              |
+   | Boekel 2017 | 2017-06-01 | 2017-05-01 | Boekel   | judge X       | Haltershow             |              | 
          
 Scenario: Opvragen van exact alle showevents
    Als ik alles opvraag via webservice 'showevents'
    Dan verwacht ik een status 'OK' met code 200
 	En verwacht ik de volgende showevents als resultaat
-   | naam        | datum      | sluitingsdatum | locatie | jury          | shows                  | deelnemers |
-   | Boekel 2017 | 2017-06-01 | 2017-05-01     | Boekel  | judge X       | Haltershow             |            |  
-   | Assen 2017  | 2017-05-01 | 2017-04-01     | Assen   | Rob Bettinson | Haltershow, Fleeceshow |            |
+   | name        | date       | closeDate  | location | judge         | shows                  | participants |
+   | Boekel 2017 | 2017-06-01 | 2017-05-01 | Boekel   | judge X       | Haltershow             |              |
+   | Assen 2017  | 2017-05-01 | 2017-04-01 | Assen    | Rob Bettinson | Haltershow, Fleeceshow |              |
 
   
 Scenario: Opvragen van een specifiek showevent
    Als ik 'Boekel 2017_2017-06-01' opvraag van webservice 'showevents'
    Dan verwacht ik een status 'OK' met code 200
    En verwacht ik de volgende showevents als resultaat
-   | naam        | datum      | sluitingsdatum | locatie | jury          | shows                  | deelnemers |
-   | Boekel 2017 | 2017-06-01 | 2017-05-01     | Boekel  | judge X       | Haltershow             |            |  
+   | name        | date       | closeDate  | location | judge   | shows      | participants |
+   | Boekel 2017 | 2017-06-01 | 2017-05-01 | Boekel   | judge X | Haltershow |              |  
 
 Scenario: Nieuw showevent opvoeren
    Als ik onderstaande opstuur naar webservice 'showevents'
@@ -47,19 +47,35 @@ Scenario: Nieuw showevent opvoeren
    Dan verwacht ik een status 'OK' met code 200
    Als ik alles opvraag via webservice 'showevents'
 	Dan verwacht ik de volgende showevents als resultaat
-   | naam        | datum      | sluitingsdatum | locatie | jury          | shows                  | deelnemers |
-   | Assen 2017  | 2017-05-01 | 2017-04-01     | Assen   | Rob Bettinson | Haltershow, Fleeceshow |            |
-   | Boekel 2017 | 2017-06-01 | 2017-05-01     | Boekel  | judge X       | Haltershow             |            | 
-   | Test 2017   | 2017-03-01 | 2017-02-15     | Test    | judge Y       | Male progeny show      |            |   
+   | name        | date       | closeDate  | location | judge         | shows                  | participants |
+   | Assen 2017  | 2017-05-01 | 2017-04-01 | Assen    | Rob Bettinson | Haltershow, Fleeceshow |              |
+   | Boekel 2017 | 2017-06-01 | 2017-05-01 | Boekel   | judge X       | Haltershow             |              |
+   | Test 2017   | 2017-03-01 | 2017-02-15 | Test     | judge Y       | Male progeny show      |              |   
 
 Scenario: Opvragen van alle showevents
    Als ik alles opvraag via webservice 'showevents'
    Dan verwacht ik een status 'OK' met code 200
 	En verwacht ik in ieder geval de volgende showevents als resultaat
-   | naam        | datum      | sluitingsdatum | locatie | jury          | shows                  | deelnemers |
-   | Test 2017   | 2017-03-01 | 2017-02-15     | Test    | judge Y       | Male progeny show      |            |   
-   | Assen 2017  | 2017-05-01 | 2017-04-01     | Assen   | Rob Bettinson | Haltershow, Fleeceshow |            |
+   | name       | date       | closeDate  | location | judge         | shows                  | participants |
+   | Test 2017  | 2017-03-01 | 2017-02-15 | Test     | judge Y       | Male progeny show      |              |
+   | Assen 2017 | 2017-05-01 | 2017-04-01 | Assen    | Rob Bettinson | Haltershow, Fleeceshow |              |
 #  | Boekel 2017 | 2017-06-01 | 2017-05-01     | Boekel  | judge X       | Haltershow             |            |        
+
+Scenario: Opvragen van exact alle showevents met bepaalde waarde
+   Als ik alles opvraag via webservice 'showevents'
+   Dan verwacht ik een status 'OK' met code 200
+	En verwacht ik de volgende gegevens van showevents als resultaat
+   | name        | date       | closeDate  | location |
+   | Test 2017   | 2017-03-01 | 2017-02-15 | Test     |
+   | Assen 2017  | 2017-05-01 | 2017-04-01 | Assen    |
+   | Boekel 2017 | 2017-06-01 | 2017-05-01 | Boekel   |      
+
+Scenario: Opvragen van alle showevents met bepaalde waarde
+   Als ik alles opvraag via webservice 'showevents'
+   Dan verwacht ik een status 'OK' met code 200
+	En verwacht ik in ieder geval de volgende gegevens van showevents als resultaat
+   | location | judge         | shows                  | participants |
+   | Assen    | Rob Bettinson | Haltershow, Fleeceshow |              |   
 
 Scenario: Bestaand showevent wijzigen met tabel
    Als ik onderstaande wijziging stuur voor 'Test 2017_2017-03-01' naar webservice 'showevents'
@@ -74,10 +90,10 @@ Scenario: Bestaand showevent wijzigen met tabel
    Dan verwacht ik een status 'OK' met code 200
    Als ik alles opvraag via webservice 'showevents'
 	Dan verwacht ik de volgende showevents als resultaat
-   | naam        | datum      | sluitingsdatum | locatie     | jury          | shows                         | deelnemers |
-   | Assen 2017  | 2017-05-01 | 2017-04-01     | Assen       | Rob Bettinson | Haltershow, Fleeceshow        |            |
-   | Boekel 2017 | 2017-06-01 | 2017-05-01     | Boekel      | judge X       | Haltershow                    |            |
-   | Test 2017   | 2017-03-01 | 2017-02-15     | Teslocatie  | jury Z        | Haltershow, Male progeny show |            |  
+   | name        | date       | closeDate  | location   | judge         | shows                         | participants |
+   | Assen 2017  | 2017-05-01 | 2017-04-01 | Assen      | Rob Bettinson | Haltershow, Fleeceshow        |              |
+   | Boekel 2017 | 2017-06-01 | 2017-05-01 | Boekel     | judge X       | Haltershow                    |              |
+   | Test 2017   | 2017-03-01 | 2017-02-15 | Teslocatie | jury Z        | Haltershow, Male progeny show |              | 
 
 
 Scenario: Bestaand showevent wijzigen met file
@@ -85,10 +101,10 @@ Scenario: Bestaand showevent wijzigen met file
    Dan verwacht ik een status 'OK' met code 200
    Als ik alles opvraag via webservice 'showevents'
 	Dan verwacht ik de volgende showevents als resultaat
-   | naam        | datum      | sluitingsdatum | locatie     | jury          | shows                         | deelnemers |
-   | Assen 2017  | 2017-05-01 | 2017-04-01     | Assen       | Rob Bettinson | Haltershow, Fleeceshow        |            |
-   | Boekel 2017 | 2017-06-01 | 2017-05-01     | Boekel      | judge X       | Haltershow                    |            |
-   | Test 2017   | 2017-03-01 | 2017-01-15     | Test        | judge Y       | Haltershow                    |            |  
+   | name        | date       | closeDate  | location | judge         | shows                  | participants |
+   | Assen 2017  | 2017-05-01 | 2017-04-01 | Assen    | Rob Bettinson | Haltershow, Fleeceshow |              |
+   | Boekel 2017 | 2017-06-01 | 2017-05-01 | Boekel   | judge X       | Haltershow             |              |
+   | Test 2017   | 2017-03-01 | 2017-01-15 | Test     | judge Y       | Haltershow             |              |  
 
 Scenario: Bestaand showevent wijzigen met multiline text
    Als ik onderstaande wijziging opstuur voor 'Test 2017_2017-03-01' naar webservice 'showevents'
@@ -110,18 +126,18 @@ Scenario: Bestaand showevent wijzigen met multiline text
    Dan verwacht ik een status 'OK' met code 200
    Als ik alles opvraag via webservice 'showevents'
 	Dan verwacht ik de volgende showevents als resultaat
-   | naam        | datum      | sluitingsdatum | locatie                | jury          | shows                  | deelnemers |
-   | Assen 2017  | 2017-05-01 | 2017-04-01     | Assen                  | Rob Bettinson | Haltershow, Fleeceshow |            |
-   | Boekel 2017 | 2017-06-01 | 2017-05-01     | Boekel                 | judge X       | Haltershow             |            |
-   | Test 2017   | 2017-03-01 | 2017-02-15     | Test wijziging locatie | judge Y       | Haltershow             |            |  
+   | name        | date       | closeDate  | location               | judge         | shows                  | participants |
+   | Assen 2017  | 2017-05-01 | 2017-04-01 | Assen                  | Rob Bettinson | Haltershow, Fleeceshow |              |
+   | Boekel 2017 | 2017-06-01 | 2017-05-01 | Boekel                 | judge X       | Haltershow             |              |
+   | Test 2017   | 2017-03-01 | 2017-02-15 | Test wijziging locatie | judge Y       | Haltershow             |              |  
 
 Scenario: Bestaande showevent verwijderen
    Als ik een verwijderverzoek opstuur voor 'Test 2017_2017-03-01' naar webservice 'showevents'
    Dan verwacht ik een status 'OK' met code 200
    Als ik alles opvraag via webservice 'showevents'
 	Dan verwacht ik de volgende showevents als resultaat
-   | naam        | datum      | sluitingsdatum | locatie | jury          | shows                  | deelnemers |
-   | Assen 2017  | 2017-05-01 | 2017-04-01     | Assen   | Rob Bettinson | Haltershow, Fleeceshow |            |
-   | Boekel 2017 | 2017-06-01 | 2017-05-01     | Boekel  | judge X       | Haltershow             |            | 
+   | name        | date       | closeDate  | location | judge         | shows                  | participants |
+   | Assen 2017  | 2017-05-01 | 2017-04-01 | Assen    | Rob Bettinson | Haltershow, Fleeceshow |              |
+   | Boekel 2017 | 2017-06-01 | 2017-05-01 | Boekel   | judge X       | Haltershow             |              | 
 
    

@@ -42,18 +42,34 @@ namespace Alpacashow_Admin_SpecflowTests.StepDefinitions
             CompareMethod.MustContainExpected), DynamicObjectsComparer.GetDiffrences());
       }
 
+      [Then(@"verwacht ik de volgende gegevens van showevents als resultaat")]
+      public void DanVerwachtIkDeVolgendeGegevensVanShoweventsAlsResultaat(Table expectedShoweventsTable)
+      {
+         dynamic actualContent, expectedContent;
+         GetActualAndExpectedContent(expectedShoweventsTable, out actualContent, out expectedContent);
+         Assert.IsTrue(DynamicObjectsComparer.CompareDynamicObjects(expectedContent, actualContent,
+            CompareMethod.ExactMatchOfExpectedValues), DynamicObjectsComparer.GetDiffrences());
+      }
+
+      [Then(@"verwacht ik in ieder geval de volgende gegevens van showevents als resultaat")]
+      public void DanVerwachtIkInIederGevalDeVolgendeGegevensVanShoweventsAlsResultaat(Table expectedShoweventsTable)
+      {
+         dynamic actualContent, expectedContent;
+         GetActualAndExpectedContent(expectedShoweventsTable, out actualContent, out expectedContent);
+         Assert.IsTrue(DynamicObjectsComparer.CompareDynamicObjects(expectedContent, actualContent,
+            CompareMethod.MustContainExpectedValues), DynamicObjectsComparer.GetDiffrences());
+      }
+
+
       private static void GetActualAndExpectedContent(Table expectedShoweventsTable, out dynamic actualContent, out dynamic expectedContent)
       {
          var response = ScenarioContext.Current["webservice-response"] as HttpResponseMessage;
          var json = response.Content.ReadAsStringAsync().Result;
-
-         string[] newTableHeader = new string[] { "name", "date", "closeDate", "location", "judge", "shows", "participants" };
-         Table convertedTable = TableConverter.ChangeHorizontalTableHeader(expectedShoweventsTable, newTableHeader);
-
+         
          // Use of dynamics to get result
          var jsonDeserilized = JsonConvert.DeserializeObject(json);
          actualContent = DynamicJsonConverter.CreateDynamicJsonSet(jsonDeserilized);
-         expectedContent = convertedTable.CreateDynamicSet();
+         expectedContent = expectedShoweventsTable.CreateDynamicSet();
       }
 
 
