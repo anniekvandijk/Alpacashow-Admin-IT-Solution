@@ -17,11 +17,10 @@ Scenario: Opvragen van exact alle showevents
    Dan verwacht ik een status 'OK' met code 200
 	En verwacht ik de volgende showevents als resultaat
    | naam        | datum      | sluitingsdatum | locatie | jury          | shows                  | deelnemers |
+   | Boekel 2017 | 2017-06-01 | 2017-05-01     | Boekel  | judge X       | Haltershow             |            |  
    | Assen 2017  | 2017-05-01 | 2017-04-01     | Assen   | Rob Bettinson | Haltershow, Fleeceshow |            |
-   | Boekel 2017 | 2017-06-01 | 2017-05-01     | Boekel  | judge X       | Haltershow             |            |    
 
-
-
+  
 Scenario: Opvragen van een specifiek showevent
    Als ik 'Boekel 2017_2017-06-01' opvraag van webservice 'showevents'
    Dan verwacht ik een status 'OK' met code 200
@@ -58,8 +57,9 @@ Scenario: Opvragen van alle showevents
    Dan verwacht ik een status 'OK' met code 200
 	En verwacht ik in ieder geval de volgende showevents als resultaat
    | naam        | datum      | sluitingsdatum | locatie | jury          | shows                  | deelnemers |
+   | Test 2017   | 2017-03-01 | 2017-02-15     | Test    | judge Y       | Male progeny show      |            |   
    | Assen 2017  | 2017-05-01 | 2017-04-01     | Assen   | Rob Bettinson | Haltershow, Fleeceshow |            |
-   | Boekel 2017 | 2017-06-01 | 2017-05-01     | Boekel  | judge X       | Haltershow             |            |        
+#  | Boekel 2017 | 2017-06-01 | 2017-05-01     | Boekel  | judge X       | Haltershow             |            |        
 
 Scenario: Bestaand showevent wijzigen met tabel
    Als ik onderstaande wijziging stuur voor 'Test 2017_2017-03-01' naar webservice 'showevents'

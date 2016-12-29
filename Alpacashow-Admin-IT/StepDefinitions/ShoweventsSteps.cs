@@ -30,7 +30,7 @@ namespace Alpacashow_Admin_SpecflowTests.StepDefinitions
          dynamic actualContent, expectedContent;
          GetActualAndExpectedContent(expectedShoweventsTable, out actualContent, out expectedContent);
          Assert.IsTrue(DynamicObjectsComparer.CompareDynamicObjects(expectedContent, actualContent,
-            CompareMethod.ExactMatch), GetDiffrences(expectedContent, actualContent));
+            CompareMethod.ExactMatch), DynamicObjectsComparer.GetDiffrences());
       }
 
       [Then(@"verwacht ik in ieder geval de volgende showevents als resultaat")]
@@ -39,7 +39,7 @@ namespace Alpacashow_Admin_SpecflowTests.StepDefinitions
          dynamic actualContent, expectedContent;
          GetActualAndExpectedContent(expectedShoweventsTable, out actualContent, out expectedContent);
          Assert.IsTrue(DynamicObjectsComparer.CompareDynamicObjects(expectedContent, actualContent,
-            CompareMethod.MustAtLeastContainExpectedKeysAndValues), GetDiffrences(expectedContent, actualContent));
+            CompareMethod.MustContainExpected), DynamicObjectsComparer.GetDiffrences());
       }
 
       private static void GetActualAndExpectedContent(Table expectedShoweventsTable, out dynamic actualContent, out dynamic expectedContent)
@@ -56,33 +56,7 @@ namespace Alpacashow_Admin_SpecflowTests.StepDefinitions
          expectedContent = convertedTable.CreateDynamicSet();
       }
 
-      private static string GetDiffrences(dynamic expectedContent, dynamic actualContent)
-      {
-         StringBuilder builder = new StringBuilder();
-         builder.Append("Verwacht:").AppendLine();
-         foreach (var exp in expectedContent)
-         {
-            foreach (var a in exp)
-            {
-               builder.Append(a.ToString());
-               builder.AppendLine();
-            }
-            builder.AppendLine();
-         }
-         builder.Append("Resultaat:").AppendLine();
-         foreach (var act in actualContent)
-         {
-            foreach (var a in act)
-            {
-               builder.Append(a.ToString());
-               builder.AppendLine();
-            }
-            builder.AppendLine();
 
-         }
-
-         return builder.ToString();
-      }
    }
 }
 
