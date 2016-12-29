@@ -58,8 +58,7 @@ Scenario: Opvragen van alle showevents
 	En verwacht ik in ieder geval de volgende showevents als resultaat
    | name       | date       | closeDate  | location | judge         | shows                  | participants |
    | Test 2017  | 2017-03-01 | 2017-02-15 | Test     | judge Y       | Male progeny show      |              |
-   | Assen 2017 | 2017-05-01 | 2017-04-01 | Assen    | Rob Bettinson | Haltershow, Fleeceshow |              |
-#  | Boekel 2017 | 2017-06-01 | 2017-05-01     | Boekel  | judge X       | Haltershow             |            |        
+   | Assen 2017 | 2017-05-01 | 2017-04-01 | Assen    | Rob Bettinson | Haltershow, Fleeceshow |              |      
 
 Scenario: Opvragen van exact alle showevents met bepaalde waarde
    Als ik alles opvraag via webservice 'showevents'

@@ -20,6 +20,7 @@ namespace Alpacashow_Admin_SpecflowTests.Utilities
       private static List<List<KeyValuePair<string, object>>> sortedActualContentList;
 
       /// <summary>
+      /// 
       /// This Class takes 2 dynamic objects to compair.
       /// </summary>
       /// <param name="expectedContent">Expected dynamic content.</param>
@@ -131,8 +132,11 @@ namespace Alpacashow_Admin_SpecflowTests.Utilities
                   break;
                }
             }
+            if (!equalList)
+            {
+               return equalList;
+            }
          }
-
          return equalList;
       }
 
@@ -167,26 +171,63 @@ namespace Alpacashow_Admin_SpecflowTests.Utilities
          List<List<KeyValuePair<string, object>>> actualContentList)
       {
          var equalList = false;
+         for (int x = 0; x < expectedContentList.Count; x++)
+         {
+            actualContentList[x].RemoveAll(item => !expectedContentList[x].Contains(item));
+         }
+         foreach (var expContent in expectedContentList)
+         {
+            foreach (var actContent in actualContentList)
+            {
+               equalList = expContent.SequenceEqual(actContent);
+               if (equalList)
+               {
+                  break;
+               }
+            }
+            if (!equalList)
+            {
+               return equalList;
+            }
+         }
          return equalList;
       }
 
-      public static string GetDiffrences()
+      public static string GetDiffrences(dynamic expected, dynamic actual)
       {
+
+         List<List<KeyValuePair<string, object>>> expectedValues = SortContentList(expected);
+         List<List<KeyValuePair<string, object>>> actualValues = SortContentList(actual);
+
+
          StringBuilder builder = new StringBuilder();
          builder.Append("Verwacht:").AppendLine();
-         foreach (var expectedContent in sortedExpectedContentList)
+         foreach (var exp in expectedValues)
          {
-            foreach (var contentline in expectedContent)
+            foreach (var contentline in exp)
             {
                builder.Append(contentline);
                builder.AppendLine();
             }
             builder.AppendLine();
          }
+
          builder.Append("Resultaat:").AppendLine();
-         foreach (var actualContent in sortedActualContentList)
+         foreach (var act in sortedActualContentList)
          {
-            foreach (var contentline in actualContent)
+            foreach (var contentline in act)
+            {
+               builder.Append(contentline);
+               builder.AppendLine();
+            }
+            builder.AppendLine();
+
+         }
+
+         builder.Append("Complete resultaat:").AppendLine();
+         foreach (var act in actualValues)
+         {
+            foreach (var contentline in act)
             {
                builder.Append(contentline);
                builder.AppendLine();

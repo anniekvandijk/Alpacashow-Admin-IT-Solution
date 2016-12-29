@@ -30,7 +30,7 @@ namespace Alpacashow_Admin_SpecflowTests.StepDefinitions
          dynamic actualContent, expectedContent;
          GetActualAndExpectedContent(expectedShoweventsTable, out actualContent, out expectedContent);
          Assert.IsTrue(DynamicObjectsComparer.CompareDynamicObjects(expectedContent, actualContent,
-            CompareMethod.ExactMatch), DynamicObjectsComparer.GetDiffrences());
+            CompareMethod.ExactMatch), DynamicObjectsComparer.GetDiffrences(expectedContent, actualContent));
       }
 
       [Then(@"verwacht ik in ieder geval de volgende showevents als resultaat")]
@@ -39,7 +39,7 @@ namespace Alpacashow_Admin_SpecflowTests.StepDefinitions
          dynamic actualContent, expectedContent;
          GetActualAndExpectedContent(expectedShoweventsTable, out actualContent, out expectedContent);
          Assert.IsTrue(DynamicObjectsComparer.CompareDynamicObjects(expectedContent, actualContent,
-            CompareMethod.MustContainExpected), DynamicObjectsComparer.GetDiffrences());
+            CompareMethod.MustContainExpected), DynamicObjectsComparer.GetDiffrences(expectedContent, actualContent));
       }
 
       [Then(@"verwacht ik de volgende gegevens van showevents als resultaat")]
@@ -48,7 +48,7 @@ namespace Alpacashow_Admin_SpecflowTests.StepDefinitions
          dynamic actualContent, expectedContent;
          GetActualAndExpectedContent(expectedShoweventsTable, out actualContent, out expectedContent);
          Assert.IsTrue(DynamicObjectsComparer.CompareDynamicObjects(expectedContent, actualContent,
-            CompareMethod.ExactMatchOfExpectedValues), DynamicObjectsComparer.GetDiffrences());
+            CompareMethod.ExactMatchOfExpectedValues), DynamicObjectsComparer.GetDiffrences(expectedContent, actualContent));
       }
 
       [Then(@"verwacht ik in ieder geval de volgende gegevens van showevents als resultaat")]
@@ -57,7 +57,7 @@ namespace Alpacashow_Admin_SpecflowTests.StepDefinitions
          dynamic actualContent, expectedContent;
          GetActualAndExpectedContent(expectedShoweventsTable, out actualContent, out expectedContent);
          Assert.IsTrue(DynamicObjectsComparer.CompareDynamicObjects(expectedContent, actualContent,
-            CompareMethod.MustContainExpectedValues), DynamicObjectsComparer.GetDiffrences());
+            CompareMethod.MustContainExpectedValues), DynamicObjectsComparer.GetDiffrences(expectedContent, actualContent));
       }
 
 
