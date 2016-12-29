@@ -13,27 +13,43 @@ namespace Alpacashow_Admin_SpecflowTests.Utilities
    }
 
    public static class DynamicObjectsComparer
-   {
+   { 
       /// <summary>
       /// This Class takes 2 dynamic objects to compair.
       /// </summary>
       /// <param name="expectedContent">Expected dynamic content.</param>
       /// <param name="actualContent">Actual dynamic content.</param>
-      /// <returns>True if List are exact match, else false</returns>
+      /// <returns>True or false</returns>
       public static bool CompareDynamicObjects(dynamic expectedContent, dynamic actualContent, CompareMethod compareMethod)
-      { 
+      {
+         List<List<KeyValuePair<string, object>>> sortedExpectedContentList = SortContentList(expectedContent);
+         List<List<KeyValuePair<string, object>>> sortedActualContentList = SortContentList(actualContent);
 
          var equalList = false;
-         foreach (var expCont in expectedContent)
+         foreach (var expected in sortedExpectedContentList)
          {
-            List<KeyValuePair<string, object>> expectedContentList = ConvertDynamicPairsList(expCont);
-            foreach (dynamic actCont in actualContent)
+            foreach (var actual in sortedActualContentList)
             {
-               List<KeyValuePair<string, object>> actualContentList = ConvertDynamicPairsList(actCont);
-               equalList = CompareLists(expectedContentList, actualContentList, compareMethod);
+               equalList = CompareLists(expected, actual, compareMethod);
             }
          }
          return equalList;
+      }
+
+      /// <summary>
+      /// Sort List of Content.
+      /// </summary>
+      /// <param name="content">Dynamic subcontent.</param>
+      /// <returns>Asending sorted List.</returns>
+      private static List<List<KeyValuePair<string, object>>> SortContentList(dynamic content)
+      {
+         List<List<KeyValuePair<string, object>>> expectedContentList = new List<List<KeyValuePair<string, object>>>();
+         foreach (var subContent in content)
+         {
+            expectedContentList.Add(SortKeyValues(subContent));
+         }
+         expectedContentList = expectedContentList.OrderBy(o => o[0].Value).ToList();
+         return expectedContentList;
       }
 
       /// <summary>
@@ -42,9 +58,9 @@ namespace Alpacashow_Admin_SpecflowTests.Utilities
       /// <remarks>
       /// This only works now with Simple objects. Childclasses are not converted.
       /// </remarks>
-      /// <param name="Content">Dynamic content.</param>
+      /// <param name="Content">Dynamic subcontent.</param>
       /// <returns>Asending sorted List of Key-Value pairs.</returns>
-      private static List<KeyValuePair<string, object>> ConvertDynamicPairsList(dynamic subcontent)
+      private static List<KeyValuePair<string, object>> SortKeyValues(dynamic subcontent)
       {
          var keyValuePairList = new List<KeyValuePair<string, object>>();
          foreach (dynamic pair in subcontent)

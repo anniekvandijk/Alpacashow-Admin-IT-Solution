@@ -10,24 +10,22 @@ namespace Alpacashow_Admin_SpecflowTests.Utilities
       public static IEnumerable<dynamic> CreateDynamicJsonSet(dynamic json)
       {
          dynamic dynamicJson = json;
-         List<dynamic> myList = new List<dynamic>();
+         List<dynamic> jsonList = new List<dynamic>();
          var jsonIsObject = dynamicJson.GetType().Name.Equals("Object") || dynamicJson.GetType().Name.Equals("JObject");
          var jsonIsArray = dynamicJson.GetType().Name.Equals("Array") || dynamicJson.GetType().Name.Equals("JArray");
 
          if (jsonIsObject)
          {
-            myList.Add(DynamicJsonInstance(json));
+            jsonList.Add(DynamicJsonInstance(json));
          }
          if (jsonIsArray)
          {
-
-            for (int array = 0; array < json.Count; array++)
+            foreach (var a in json)
             {
-               myList.Add(DynamicJsonInstance(json[array]));
+               jsonList.Add(DynamicJsonInstance(a));
             }
          }
-         var bla = myList;
-         return bla;
+         return jsonList;
       }
 
       private static ExpandoObject DynamicJsonInstance(dynamic json)
