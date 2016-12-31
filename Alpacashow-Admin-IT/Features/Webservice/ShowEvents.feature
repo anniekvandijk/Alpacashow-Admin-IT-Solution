@@ -1,35 +1,33 @@
-﻿#language: nl-NL
-Functionaliteit: Showevents CRUD
+﻿Feature: ShowEvents CRUD 
 	
-   Als gebruiker moet ik showevents kunnen 
-   opvragen, toevoegen wijzigen en verwijderen
-   Wanneer het opgevraagde event niet bestaat of er gaat wat fout
-   Dan verwacht ik een duidelijke foutcode 
+   As a user I have to get, post, put and delete showevents
+   from the webservice
+   so I can use them in a frontend application
 
-Achtergrond: Aanwezige showevents
-	Stel de volgende showevents zijn aanwezig
+Background: The showevents that are present
+	Given the following showevents are present
    | name        | date       | closeDate  | location | judge         | shows                  | participants |
    | Assen 2017  | 2017-05-01 | 2017-04-01 | Assen    | Rob Bettinson | Haltershow, Fleeceshow |              |
    | Boekel 2017 | 2017-06-01 | 2017-05-01 | Boekel   | judge X       | Haltershow             |              | 
          
-Scenario: Opvragen van exact alle showevents
-   Als ik alles opvraag via webservice 'showevents'
-   Dan verwacht ik een status 'OK' met code 200
-	En verwacht ik de volgende showevents als resultaat
+Scenario: Get exact all showevents
+   When i perform a 'GET' on webservice 'showevents'
+   Then i expect status 'OK' with code 200
+	And i expect exact the following result of showevents
    | name        | date       | closeDate  | location | judge         | shows                  | participants |
    | Boekel 2017 | 2017-06-01 | 2017-05-01 | Boekel   | judge X       | Haltershow             |              |
    | Assen 2017  | 2017-05-01 | 2017-04-01 | Assen    | Rob Bettinson | Haltershow, Fleeceshow |              |
 
   
-Scenario: Opvragen van een specifiek showevent
-   Als ik 'Boekel 2017_2017-06-01' opvraag van webservice 'showevents'
-   Dan verwacht ik een status 'OK' met code 200
-   En verwacht ik de volgende showevents als resultaat
+Scenario: Get specific showevent
+   When i perform a 'GET' for 'Boekel 2017_2017-06-01' on webservice 'showevents'
+   Then i expect status 'OK' with code 200
+   And i expect exact the following result of showevents
    | name        | date       | closeDate  | location | judge   | shows      | participants |
    | Boekel 2017 | 2017-06-01 | 2017-05-01 | Boekel   | judge X | Haltershow |              |  
 
-Scenario: Nieuw showevent opvoeren
-   Als ik onderstaande opstuur naar webservice 'showevents'
+Scenario: Post new showevent
+   When i perform a 'POST' on webservice 'showevents'
    """
 {
   "name": "Test 2017",
@@ -44,40 +42,40 @@ Scenario: Nieuw showevent opvoeren
   ]
 }
    """
-   Dan verwacht ik een status 'OK' met code 200
-   Als ik alles opvraag via webservice 'showevents'
-	Dan verwacht ik de volgende showevents als resultaat
+   Then i expect status 'OK' with code 200
+   When i perform a 'GET' on webservice 'showevents'
+	Then i expect exact the following result of showevents
    | name        | date       | closeDate  | location | judge         | shows                  | participants |
    | Assen 2017  | 2017-05-01 | 2017-04-01 | Assen    | Rob Bettinson | Haltershow, Fleeceshow |              |
    | Boekel 2017 | 2017-06-01 | 2017-05-01 | Boekel   | judge X       | Haltershow             |              |
    | Test 2017   | 2017-03-01 | 2017-02-15 | Test     | judge Y       | Male progeny show      |              |   
 
-Scenario: Opvragen van alle showevents
-   Als ik alles opvraag via webservice 'showevents'
-   Dan verwacht ik een status 'OK' met code 200
-	En verwacht ik in ieder geval de volgende showevents als resultaat
+Scenario: Get all showevents but at least one with all values
+   When i perform a 'GET' on webservice 'showevents'
+   Then i expect status 'OK' with code 200
+	And i expect at least the following result of showevents
    | name       | date       | closeDate  | location | judge         | shows                  | participants |
    | Test 2017  | 2017-03-01 | 2017-02-15 | Test     | judge Y       | Male progeny show      |              |
    | Assen 2017 | 2017-05-01 | 2017-04-01 | Assen    | Rob Bettinson | Haltershow, Fleeceshow |              |      
 
-Scenario: Opvragen van exact alle showevents met bepaalde waarde
-   Als ik alles opvraag via webservice 'showevents'
-   Dan verwacht ik een status 'OK' met code 200
-	En verwacht ik de volgende gegevens van showevents als resultaat
+Scenario: Get all showevents with specific value
+   When i perform a 'GET' on webservice 'showevents'
+   Then i expect status 'OK' with code 200
+	And i expect exact the following specific results of showevents
    | name        | date       | closeDate  | location |
    | Test 2017   | 2017-03-01 | 2017-02-15 | Test     |
    | Assen 2017  | 2017-05-01 | 2017-04-01 | Assen    |
    | Boekel 2017 | 2017-06-01 | 2017-05-01 | Boekel   |      
 
-Scenario: Opvragen van alle showevents met bepaalde waarde
-   Als ik alles opvraag via webservice 'showevents'
-   Dan verwacht ik een status 'OK' met code 200
-	En verwacht ik in ieder geval de volgende gegevens van showevents als resultaat
+Scenario: Get all showevents but at least one with specific value
+   When i perform a 'GET' on webservice 'showevents'
+   Then i expect status 'OK' with code 200
+	And i expect at least the following specific results of showevents
    | location | judge         | shows                  | participants |
    | Assen    | Rob Bettinson | Haltershow, Fleeceshow |              |   
 
-Scenario: Bestaand showevent wijzigen met tabel
-   Als ik onderstaande wijziging stuur voor 'Test 2017_2017-03-01' naar webservice 'showevents'
+Scenario: Change excisting showevent with table
+   When i perform a 'PUT' for the following change on 'Test 2017_2017-03-01' to webservice 'showevents'
    | parameter      | value             |
    | name           | Test 2017         |
    | date           | 2017-03-01        |
@@ -86,27 +84,27 @@ Scenario: Bestaand showevent wijzigen met tabel
    | judge          | jury Z            |
    | shows.showType | Haltershow        |
    | shows.showType | Male progeny show |
-   Dan verwacht ik een status 'OK' met code 200
-   Als ik alles opvraag via webservice 'showevents'
-	Dan verwacht ik de volgende showevents als resultaat
+   Then i expect status 'OK' with code 200
+   When i perform a 'GET' on webservice 'showevents'
+	Then i expect exact the following result of showevents
    | name        | date       | closeDate  | location   | judge         | shows                         | participants |
    | Assen 2017  | 2017-05-01 | 2017-04-01 | Assen      | Rob Bettinson | Haltershow, Fleeceshow        |              |
    | Boekel 2017 | 2017-06-01 | 2017-05-01 | Boekel     | judge X       | Haltershow                    |              |
    | Test 2017   | 2017-03-01 | 2017-02-15 | Teslocatie | jury Z        | Haltershow, Male progeny show |              | 
 
 
-Scenario: Bestaand showevent wijzigen met file
-   Als ik 'wijzigShowEvent' als wijziging stuur voor 'Test 2017_2017-03-01' naar webservice 'showevents'
-   Dan verwacht ik een status 'OK' met code 200
-   Als ik alles opvraag via webservice 'showevents'
-	Dan verwacht ik de volgende showevents als resultaat
+Scenario: Change excisting showevent with file
+   When i perform a 'PUT' with file 'wijzigShowEvent' on 'Test 2017_2017-03-01' to webservice 'showevents'
+   Then i expect status 'OK' with code 200
+   When i perform a 'GET' on webservice 'showevents'
+	Then i expect exact the following result of showevents
    | name        | date       | closeDate  | location | judge         | shows                  | participants |
    | Assen 2017  | 2017-05-01 | 2017-04-01 | Assen    | Rob Bettinson | Haltershow, Fleeceshow |              |
    | Boekel 2017 | 2017-06-01 | 2017-05-01 | Boekel   | judge X       | Haltershow             |              |
    | Test 2017   | 2017-03-01 | 2017-01-15 | Test     | judge Y       | Haltershow             |              |  
 
-Scenario: Bestaand showevent wijzigen met multiline text
-   Als ik onderstaande wijziging opstuur voor 'Test 2017_2017-03-01' naar webservice 'showevents'
+Scenario: Change excisting showevent with multiline text
+   When i perform a 'PUT' for the following Json change on 'Test 2017_2017-03-01' to webservice 'showevents'
    """
 {
   "name": "Test 2017",
@@ -122,19 +120,19 @@ Scenario: Bestaand showevent wijzigen met multiline text
   ]
 }
    """
-   Dan verwacht ik een status 'OK' met code 200
-   Als ik alles opvraag via webservice 'showevents'
-	Dan verwacht ik de volgende showevents als resultaat
+   Then i expect status 'OK' with code 200
+   When i perform a 'GET' on webservice 'showevents'
+	Then i expect exact the following result of showevents
    | name        | date       | closeDate  | location               | judge         | shows                  | participants |
    | Assen 2017  | 2017-05-01 | 2017-04-01 | Assen                  | Rob Bettinson | Haltershow, Fleeceshow |              |
    | Boekel 2017 | 2017-06-01 | 2017-05-01 | Boekel                 | judge X       | Haltershow             |              |
    | Test 2017   | 2017-03-01 | 2017-02-15 | Test wijziging locatie | judge Y       | Haltershow             |              |  
 
-Scenario: Bestaande showevent verwijderen
-   Als ik een verwijderverzoek opstuur voor 'Test 2017_2017-03-01' naar webservice 'showevents'
-   Dan verwacht ik een status 'OK' met code 200
-   Als ik alles opvraag via webservice 'showevents'
-	Dan verwacht ik de volgende showevents als resultaat
+Scenario: Delete an existing showevent
+   When i perform a 'DELETE'  on  'Test 2017_2017-03-01' to webservice 'showevents'
+   Then i expect status 'OK' with code 200
+   When i perform a 'GET' on webservice 'showevents'
+	Then i expect exact the following result of showevents
    | name        | date       | closeDate  | location | judge         | shows                  | participants |
    | Assen 2017  | 2017-05-01 | 2017-04-01 | Assen    | Rob Bettinson | Haltershow, Fleeceshow |              |
    | Boekel 2017 | 2017-06-01 | 2017-05-01 | Boekel   | judge X       | Haltershow             |              | 

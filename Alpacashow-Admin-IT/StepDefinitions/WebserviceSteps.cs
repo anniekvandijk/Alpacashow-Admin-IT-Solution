@@ -1,16 +1,11 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using Alpacashow_Admin_SpecflowTests.Utilities;
 using TechTalk.SpecFlow;
-using TechTalk.SpecFlow.Assist;
-using TechTalk.SpecFlow.UnitTestProvider;
 
 namespace Alpacashow_Admin_SpecflowTests.StepDefinitions
 {
@@ -18,60 +13,60 @@ namespace Alpacashow_Admin_SpecflowTests.StepDefinitions
     public class WebserviceSteps
     {
 
-      [When(@"ik alles opvraag via webservice '(.*)'")]
-      public void AlsIkAlleShowsOpvraag(String path)
+      [When(@"i perform a 'GET' on webservice '(.*)'")]
+      public void GetAllShowevents(String path)
       {
          SentRequest(string.Empty, path, null, "GET");
       }
 
-      [When(@"ik '(.*)' opvraag van webservice '(.*)'")]
-      public void AlsIkOpvraagMetKey(string key, string path)
+      [When(@"i perform a 'GET' for '(.*)' on webservice '(.*)'")]
+      public void GetShoweventWithKey(string key, string path)
       {
          SentRequest(key, path, null, "GET");
       }
 
-      [When(@"ik onderstaande opstuur naar webservice '(.*)'")]
-      public void AlsIkDeVolgendeOpvoer(string path, string multilineText)
+      [When(@"i perform a 'POST' on webservice '(.*)'")]
+      public void PostShowevent(string path, string multilineText)
       {
          StringContent content = new StringContent(multilineText, Encoding.UTF8, "application/json");
          SentRequest(string.Empty, path, content, "POST");
       }
-
-      [When(@"ik onderstaande wijziging opstuur voor '(.*)' naar webservice '(.*)'")]
-      public void AlsIkOnderstaandeWijzigingOpstuurVoorKeyNaarWebservice(string key, string path, string multilineText)
+   
+      [When(@"i perform a 'PUT' for the following Json change on '(.*)' to webservice '(.*)'")]
+      public void PutShoweventWithJson(string key, string path, string multilineText)
       {
          var content = new StringContent(multilineText, Encoding.UTF8, "application/json");
          SentRequest(key, path, content, "PUT");
       }
 
-      [When(@"ik onderstaande wijziging stuur voor '(.*)' naar webservice '(.*)'")]
-      public void AlsIkOnderstaandeWijzigingStuurVoorNaarWebservice(string key, string path, Table table)
+      [When(@"i perform a 'PUT' for the following change on '(.*)' to webservice '(.*)'")]
+      public void PutShoweventWithTable(string key, string path, Table table)
        {
          var JsonString = TableConverter.VerticalTableToJson(table);
          var content = new StringContent(JsonString, Encoding.UTF8, "application/json");
          SentRequest(key, path, content, "PUT");
       }
 
-      [When(@"ik '(.*)' als wijziging stuur voor '(.*)' naar webservice '(.*)'")]
-      public void AlsIkStuurVoorNaarWebservice(string file, string key, string path)
+      [When(@"i perform a 'PUT' with file '(.*)' on '(.*)' to webservice '(.*)'")]
+      public void PutShoweventWithFile(string file, string key, string path)
       {
          var fileContent = File.ReadAllText($"./Testdata/Input/json/{file}.json");
          var content = new StringContent(fileContent, Encoding.UTF8, "application/json");
          SentRequest(key, path, content, "PUT");
       }
 
-      [When(@"ik een verwijderverzoek opstuur voor '(.*)' naar webservice '(.*)'")]
-      public void AlsIkEenVerwijderverzoekOpstuurVoorKeyNaarWebservice(string key, string path)
+      [When(@"i perform a 'DELETE'  on  '(.*)' to webservice '(.*)'")]
+      public void DeleteShowevent(string key, string path)
       {
          SentRequest(key, path, null, "DELETE");
       }
 
-      [Then(@"verwacht ik een status '(.*)' met code (.*)")]
-      public void DanVerwachtIkEenStatuscodeMetResponsemessage(string status, int code)
+      [Then(@"i expect status '(.*)' with code (.*)")]
+      public void ExpectedStatus(string status, int code)
       {
          var result = ScenarioContext.Current["webservice-response"] as HttpResponseMessage;
-         Assert.AreEqual(status, result.ReasonPhrase, "Status verwacht: '" + status + "' maar was: '" + result.ReasonPhrase + "'.");
-         Assert.AreEqual(code, (int)result.StatusCode, "Statuscode verwacht: '" + code + "' maar was: '" + (int)result.StatusCode + "'.");
+         Assert.AreEqual(status, result.ReasonPhrase);
+         Assert.AreEqual(code, (int)result.StatusCode);
       }
 
        private static void SentRequest(string key, string path, StringContent content, string HttpMethod)

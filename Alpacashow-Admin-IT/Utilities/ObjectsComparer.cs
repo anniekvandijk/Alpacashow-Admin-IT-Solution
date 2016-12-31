@@ -193,15 +193,15 @@ namespace Alpacashow_Admin_SpecflowTests.Utilities
          return equalList;
       }
 
-      public static string GetDiffrences(dynamic expected, dynamic actual)
+      public static string GetDiffrences()
       {
 
-         List<List<KeyValuePair<string, object>>> expectedValues = SortContentList(expected);
-         List<List<KeyValuePair<string, object>>> actualValues = SortContentList(actual);
+         List<List<KeyValuePair<string, object>>> expectedValues = sortedExpectedContentList;
+         List<List<KeyValuePair<string, object>>> actualValues = sortedActualContentList;
 
 
          StringBuilder builder = new StringBuilder();
-         builder.Append("Verwacht:").AppendLine();
+         builder.Append("Expectation:").AppendLine();
          foreach (var exp in expectedValues)
          {
             foreach (var contentline in exp)
@@ -212,7 +212,7 @@ namespace Alpacashow_Admin_SpecflowTests.Utilities
             builder.AppendLine();
          }
 
-         builder.Append("Resultaat:").AppendLine();
+         builder.Append("Result:").AppendLine();
          foreach (var act in sortedActualContentList)
          {
             foreach (var contentline in act)
@@ -224,7 +224,7 @@ namespace Alpacashow_Admin_SpecflowTests.Utilities
 
          }
 
-         builder.Append("Complete resultaat:").AppendLine();
+         builder.Append("Total result:").AppendLine();
          foreach (var act in actualValues)
          {
             foreach (var contentline in act)

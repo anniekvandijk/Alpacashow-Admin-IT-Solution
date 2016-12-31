@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Dynamic;
-using System.Linq;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
+﻿using System.Net.Http;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using TechTalk.SpecFlow;
@@ -16,63 +10,51 @@ namespace Alpacashow_Admin_SpecflowTests.StepDefinitions
    [Binding]
    public class ShoweventsSteps
    {
-      [Given(@"de volgende showevents zijn aanwezig")]
-      public void GegevenDeVolgendeShoweventsZijnAanwezig(Table table)
+      [Given(@"the following showevents are present")]
+      public void ShoweventsPresent(Table table)
       {
          //ScenarioContext.Current.Pending();
          dynamic tableContent = table.CreateDynamicSet();
          ScenarioContext.Current.Add("temp", tableContent);
       }
 
-      [Then(@"verwacht ik de volgende showevents als resultaat")]
-      public void DanVerwachtIkDeVolgendeShoweventsAlsResultaat(Table expectedShoweventsTable)
+      [Then(@"i expect exact the following result of showevents")]
+      public void ExactShoweventResult(Table expectedShoweventsTable)
       {
-         dynamic actualContent, expectedContent;
-         GetActualAndExpectedContent(expectedShoweventsTable, out actualContent, out expectedContent);
-         Assert.IsTrue(DynamicObjectsComparer.CompareDynamicObjects(expectedContent, actualContent,
-            CompareMethod.ExactMatch), DynamicObjectsComparer.GetDiffrences(expectedContent, actualContent));
+         Assert.IsTrue(GetActualAndExpectedContent(expectedShoweventsTable, CompareMethod.ExactMatch), DynamicObjectsComparer.GetDiffrences());
       }
 
-      [Then(@"verwacht ik in ieder geval de volgende showevents als resultaat")]
-      public void DanVerwachtIkInIederGevalDeVolgendeShoweventsAlsResultaat(Table expectedShoweventsTable)
+      [Then(@"i expect at least the following result of showevents")]
+      public void AtLeastShoweventResult(Table expectedShoweventsTable)
       {
-         dynamic actualContent, expectedContent;
-         GetActualAndExpectedContent(expectedShoweventsTable, out actualContent, out expectedContent);
-         Assert.IsTrue(DynamicObjectsComparer.CompareDynamicObjects(expectedContent, actualContent,
-            CompareMethod.MustContainExpected), DynamicObjectsComparer.GetDiffrences(expectedContent, actualContent));
+         Assert.IsTrue(GetActualAndExpectedContent(expectedShoweventsTable, CompareMethod.MustContainExpected), DynamicObjectsComparer.GetDiffrences());
       }
 
-      [Then(@"verwacht ik de volgende gegevens van showevents als resultaat")]
-      public void DanVerwachtIkDeVolgendeGegevensVanShoweventsAlsResultaat(Table expectedShoweventsTable)
+      [Then(@"i expect exact the following specific results of showevents")]
+      public void SpecificShoweventResult(Table expectedShoweventsTable)
       {
-         dynamic actualContent, expectedContent;
-         GetActualAndExpectedContent(expectedShoweventsTable, out actualContent, out expectedContent);
-         Assert.IsTrue(DynamicObjectsComparer.CompareDynamicObjects(expectedContent, actualContent,
-            CompareMethod.ExactMatchOfExpectedValues), DynamicObjectsComparer.GetDiffrences(expectedContent, actualContent));
+         Assert.IsTrue(GetActualAndExpectedContent(expectedShoweventsTable, CompareMethod.ExactMatchOfExpectedValues), DynamicObjectsComparer.GetDiffrences());
       }
 
-      [Then(@"verwacht ik in ieder geval de volgende gegevens van showevents als resultaat")]
-      public void DanVerwachtIkInIederGevalDeVolgendeGegevensVanShoweventsAlsResultaat(Table expectedShoweventsTable)
+      [Then(@"i expect at least the following specific results of showevents")]
+      public void AtLeastSpecificShoweventResult(Table expectedShoweventsTable)
       {
-         dynamic actualContent, expectedContent;
-         GetActualAndExpectedContent(expectedShoweventsTable, out actualContent, out expectedContent);
-         Assert.IsTrue(DynamicObjectsComparer.CompareDynamicObjects(expectedContent, actualContent,
-            CompareMethod.MustContainExpectedValues), DynamicObjectsComparer.GetDiffrences(expectedContent, actualContent));
+         Assert.IsTrue(GetActualAndExpectedContent(expectedShoweventsTable, CompareMethod.MustContainExpectedValues), DynamicObjectsComparer.GetDiffrences());
       }
 
-
-      private static void GetActualAndExpectedContent(Table expectedShoweventsTable, out dynamic actualContent, out dynamic expectedContent)
+      private bool GetActualAndExpectedContent(Table expectedShoweventsTable, CompareMethod compareMethod)
       {
          var response = ScenarioContext.Current["webservice-response"] as HttpResponseMessage;
          var json = response.Content.ReadAsStringAsync().Result;
          
          // Use of dynamics to get result
          var jsonDeserilized = JsonConvert.DeserializeObject(json);
-         actualContent = DynamicJsonConverter.CreateDynamicJsonSet(jsonDeserilized);
-         expectedContent = expectedShoweventsTable.CreateDynamicSet();
+         dynamic actualContent = DynamicJsonConverter.CreateDynamicJsonSet(jsonDeserilized);
+         dynamic expectedContent = expectedShoweventsTable.CreateDynamicSet();
+
+         var equal = DynamicObjectsComparer.CompareDynamicObjects(expectedContent, actualContent, compareMethod);
+         return equal;
       }
-
-
    }
 }
 
