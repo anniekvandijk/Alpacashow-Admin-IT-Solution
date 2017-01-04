@@ -26,7 +26,7 @@ namespace Alpacashow_Admin_IT.Configuration
          }
       }
 
-      private static string GetActiveEnvironment ()
+      public static string GetActiveEnvironment ()
       {
          return ConfigurationManager.AppSettings["ActiveEnvironment"];
       }

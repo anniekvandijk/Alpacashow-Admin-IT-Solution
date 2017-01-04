@@ -14,7 +14,10 @@ namespace Alpacashow_Admin_IT.Configuration
       [BeforeFeature]
       public static void BeforeFeature()
       {
+          var env = AppSettings.GetActiveEnvironment();
          var url = AppSettings.getEnvironmentUrl();
+
+         FeatureContext.Current.Add("active-environment", env);
          FeatureContext.Current.Add("environment-settings", url);
       }
    }

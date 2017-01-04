@@ -1,4 +1,5 @@
 ﻿using System.Net.Http;
+using Alpacashow_Admin_SpecflowTests.Actions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using TechTalk.SpecFlow;
@@ -13,9 +14,7 @@ namespace Alpacashow_Admin_SpecflowTests.StepDefinitions
       [Given(@"the following showevents are present")]
       public void ShoweventsPresent(Table table)
       {
-         //ScenarioContext.Current.Pending();
-         dynamic tableContent = table.CreateDynamicSet();
-         ScenarioContext.Current.Add("temp", tableContent);
+          ShoweventsActions.CreateShowevents(table);
       }
 
       [Then(@"i expect exact the following result of showevents")]

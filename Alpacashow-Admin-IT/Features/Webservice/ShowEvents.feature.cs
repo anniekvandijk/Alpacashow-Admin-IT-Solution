@@ -96,6 +96,14 @@ namespace Alpacashow_Admin_SpecflowTests.Features.Webservice
                         "judge X",
                         "Haltershow",
                         ""});
+            table1.AddRow(new string[] {
+                        "Test 2017",
+                        "2017-03-01",
+                        "2017-02-15",
+                        "Testlocatie",
+                        "jury Z",
+                        "Haltershow, Male progeny show",
+                        ""});
 #line 8
  testRunner.Given("the following showevents are present", ((string)(null)), table1, "Given ");
 #line hidden
@@ -107,13 +115,13 @@ namespace Alpacashow_Admin_SpecflowTests.Features.Webservice
         public virtual void GetExactAllShowevents()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get exact all showevents", ((string[])(null)));
-#line 13
+#line 14
 this.ScenarioSetup(scenarioInfo);
 #line 7
 this.FeatureBackground();
-#line 14
-   testRunner.When("i perform a \'GET\' on webservice \'showevents\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 15
+   testRunner.When("i perform a \'GET\' on webservice \'showevents\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 16
    testRunner.Then("i expect status \'OK\' with code 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
@@ -125,6 +133,14 @@ this.FeatureBackground();
                         "shows",
                         "participants"});
             table2.AddRow(new string[] {
+                        "Assen 2017",
+                        "2017-05-01",
+                        "2017-04-01",
+                        "Assen",
+                        "Rob Bettinson",
+                        "Haltershow, Fleeceshow",
+                        ""});
+            table2.AddRow(new string[] {
                         "Boekel 2017",
                         "2017-06-01",
                         "2017-05-01",
@@ -133,15 +149,15 @@ this.FeatureBackground();
                         "Haltershow",
                         ""});
             table2.AddRow(new string[] {
-                        "Assen 2017",
-                        "2017-05-01",
-                        "2017-04-01",
-                        "Assen",
-                        "Rob Bettinson",
-                        "Haltershow, Fleeceshow",
+                        "Test 2017",
+                        "2017-03-01",
+                        "2017-02-15",
+                        "Testlocatie",
+                        "jury Z",
+                        "Haltershow, Male progeny show",
                         ""});
-#line 16
- testRunner.And("i expect exact the following result of showevents", ((string)(null)), table2, "And ");
+#line 17
+   testRunner.And("i expect exact the following result of showevents", ((string)(null)), table2, "And ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -152,13 +168,13 @@ this.FeatureBackground();
         public virtual void GetSpecificShowevent()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get specific showevent", ((string[])(null)));
-#line 22
+#line 23
 this.ScenarioSetup(scenarioInfo);
 #line 7
 this.FeatureBackground();
-#line 23
-   testRunner.When("i perform a \'GET\' for \'Boekel 2017_2017-06-01\' on webservice \'showevents\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 24
+   testRunner.When("i perform a \'GET\' for \'Boekel 2017_2017-06-01\' on webservice \'showevents\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 25
    testRunner.Then("i expect status \'OK\' with code 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
@@ -177,7 +193,7 @@ this.FeatureBackground();
                         "judge X",
                         "Haltershow",
                         ""});
-#line 25
+#line 26
    testRunner.And("i expect exact the following result of showevents", ((string)(null)), table3, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -189,18 +205,18 @@ this.FeatureBackground();
         public virtual void PostNewShowevent()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Post new showevent", ((string[])(null)));
-#line 29
+#line 30
 this.ScenarioSetup(scenarioInfo);
 #line 7
 this.FeatureBackground();
 #line hidden
-#line 30
-   testRunner.When("i perform a \'POST\' on webservice \'showevents\'", "{\r\n\"name\": \"Test 2017\",\r\n\"date\": \"2017-03-01\",\r\n\"closeDate\": \"2017-02-15\",\r\n\"loca" +
-                    "tion\": \"Test\",\r\n\"judge\": \"judge Y\",\r\n\"shows\": [\r\n {\r\n   \"showType\": \"Male progen" +
-                    "y show\"\r\n }\r\n]\r\n}", ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 45
-   testRunner.Then("i expect status \'OK\' with code 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 31
+   testRunner.When("i perform a \'POST\' on webservice \'showevents\'", "{\r\n\"name\": \"Hapert 2018\",\r\n\"date\": \"2018-02-12\",\r\n\"closeDate\": \"2018-01-10\",\r\n\"lo" +
+                    "cation\": \"Hapert\",\r\n\"judge\": \"judge bla\",\r\n\"shows\": [\r\n {\r\n   \"showType\": \"Femal" +
+                    "e progeny show\"\r\n }\r\n]\r\n}", ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 46
+   testRunner.Then("i expect status \'OK\' with code 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 47
    testRunner.When("i perform a \'GET\' on webservice \'showevents\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
             TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
@@ -231,11 +247,19 @@ this.FeatureBackground();
                         "Test 2017",
                         "2017-03-01",
                         "2017-02-15",
-                        "Test",
-                        "judge Y",
-                        "Male progeny show",
+                        "Testlocatie",
+                        "jury Z",
+                        "Haltershow, Male progeny show",
                         ""});
-#line 47
+            table4.AddRow(new string[] {
+                        "Hapert 2018",
+                        "2018-02-12",
+                        "2018-01-10",
+                        "Hapert",
+                        "judge bla",
+                        "Female progeny show",
+                        ""});
+#line 48
  testRunner.Then("i expect exact the following result of showevents", ((string)(null)), table4, "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -247,13 +271,13 @@ this.FeatureBackground();
         public virtual void GetAllShoweventsButAtLeastOneWithAllValues()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get all showevents but at least one with all values", ((string[])(null)));
-#line 53
+#line 55
 this.ScenarioSetup(scenarioInfo);
 #line 7
 this.FeatureBackground();
-#line 54
+#line 56
    testRunner.When("i perform a \'GET\' on webservice \'showevents\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 55
+#line 57
    testRunner.Then("i expect status \'OK\' with code 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
@@ -265,14 +289,6 @@ this.FeatureBackground();
                         "shows",
                         "participants"});
             table5.AddRow(new string[] {
-                        "Test 2017",
-                        "2017-03-01",
-                        "2017-02-15",
-                        "Test",
-                        "judge Y",
-                        "Male progeny show",
-                        ""});
-            table5.AddRow(new string[] {
                         "Assen 2017",
                         "2017-05-01",
                         "2017-04-01",
@@ -280,7 +296,7 @@ this.FeatureBackground();
                         "Rob Bettinson",
                         "Haltershow, Fleeceshow",
                         ""});
-#line 56
+#line 58
  testRunner.And("i expect at least the following result of showevents", ((string)(null)), table5, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -292,13 +308,13 @@ this.FeatureBackground();
         public virtual void GetAllShoweventsWithSpecificValue()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get all showevents with specific value", ((string[])(null)));
-#line 61
+#line 62
 this.ScenarioSetup(scenarioInfo);
 #line 7
 this.FeatureBackground();
-#line 62
-   testRunner.When("i perform a \'GET\' on webservice \'showevents\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 63
+   testRunner.When("i perform a \'GET\' on webservice \'showevents\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 64
    testRunner.Then("i expect status \'OK\' with code 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
@@ -306,11 +322,6 @@ this.FeatureBackground();
                         "date",
                         "closeDate",
                         "location"});
-            table6.AddRow(new string[] {
-                        "Test 2017",
-                        "2017-03-01",
-                        "2017-02-15",
-                        "Test"});
             table6.AddRow(new string[] {
                         "Assen 2017",
                         "2017-05-01",
@@ -321,7 +332,12 @@ this.FeatureBackground();
                         "2017-06-01",
                         "2017-05-01",
                         "Boekel"});
-#line 64
+            table6.AddRow(new string[] {
+                        "Test 2017",
+                        "2017-03-01",
+                        "2017-02-15",
+                        "Testlocatie"});
+#line 65
  testRunner.And("i expect exact the following specific results of showevents", ((string)(null)), table6, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -333,13 +349,13 @@ this.FeatureBackground();
         public virtual void GetAllShoweventsButAtLeastOneWithSpecificValue()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get all showevents but at least one with specific value", ((string[])(null)));
-#line 70
+#line 71
 this.ScenarioSetup(scenarioInfo);
 #line 7
 this.FeatureBackground();
-#line 71
-   testRunner.When("i perform a \'GET\' on webservice \'showevents\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 72
+   testRunner.When("i perform a \'GET\' on webservice \'showevents\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 73
    testRunner.Then("i expect status \'OK\' with code 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
@@ -352,7 +368,7 @@ this.FeatureBackground();
                         "Rob Bettinson",
                         "Haltershow, Fleeceshow",
                         ""});
-#line 73
+#line 74
  testRunner.And("i expect at least the following specific results of showevents", ((string)(null)), table7, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -364,7 +380,7 @@ this.FeatureBackground();
         public virtual void ChangeExcistingShoweventWithTable()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Change excisting showevent with table", ((string[])(null)));
-#line 77
+#line 78
 this.ScenarioSetup(scenarioInfo);
 #line 7
 this.FeatureBackground();
@@ -393,12 +409,12 @@ this.FeatureBackground();
             table8.AddRow(new string[] {
                         "shows.showType",
                         "Male progeny show"});
-#line 78
+#line 79
    testRunner.When("i perform a \'PUT\' for the following change on \'Test 2017_2017-03-01\' to webservic" +
                     "e \'showevents\'", ((string)(null)), table8, "When ");
-#line 87
-   testRunner.Then("i expect status \'OK\' with code 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 88
+   testRunner.Then("i expect status \'OK\' with code 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 89
    testRunner.When("i perform a \'GET\' on webservice \'showevents\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
             TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
@@ -433,7 +449,7 @@ this.FeatureBackground();
                         "jury Z",
                         "Haltershow, Male progeny show",
                         ""});
-#line 89
+#line 90
  testRunner.Then("i expect exact the following result of showevents", ((string)(null)), table9, "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -445,16 +461,16 @@ this.FeatureBackground();
         public virtual void ChangeExcistingShoweventWithFile()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Change excisting showevent with file", ((string[])(null)));
-#line 96
+#line 97
 this.ScenarioSetup(scenarioInfo);
 #line 7
 this.FeatureBackground();
-#line 97
+#line 98
    testRunner.When("i perform a \'PUT\' with file \'wijzigShowEvent\' on \'Test 2017_2017-03-01\' to webser" +
                     "vice \'showevents\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 98
-   testRunner.Then("i expect status \'OK\' with code 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 99
+   testRunner.Then("i expect status \'OK\' with code 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 100
    testRunner.When("i perform a \'GET\' on webservice \'showevents\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
             TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
@@ -489,7 +505,7 @@ this.FeatureBackground();
                         "judge Y",
                         "Haltershow",
                         ""});
-#line 100
+#line 101
  testRunner.Then("i expect exact the following result of showevents", ((string)(null)), table10, "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -501,19 +517,19 @@ this.FeatureBackground();
         public virtual void ChangeExcistingShoweventWithMultilineText()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Change excisting showevent with multiline text", ((string[])(null)));
-#line 106
+#line 107
 this.ScenarioSetup(scenarioInfo);
 #line 7
 this.FeatureBackground();
 #line hidden
-#line 107
+#line 108
    testRunner.When("i perform a \'PUT\' for the following Json change on \'Test 2017_2017-03-01\' to webs" +
                     "ervice \'showevents\'", "{\r\n\"name\": \"Test 2017\",\r\n\"date\": \"2017-03-01\",\r\n\"closeDate\": \"2017-02-15\",\r\n\"loca" +
                     "tion\": \"Test wijziging locatie\",\r\n\"judge\": \"judge Y\",\r\n\"participants\": [],\r\n\"sho" +
                     "ws\": [\r\n {\r\n   \"showType\": \"Haltershow\"\r\n }\r\n]\r\n}", ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 123
-   testRunner.Then("i expect status \'OK\' with code 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 124
+   testRunner.Then("i expect status \'OK\' with code 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 125
    testRunner.When("i perform a \'GET\' on webservice \'showevents\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
             TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
@@ -548,7 +564,7 @@ this.FeatureBackground();
                         "judge Y",
                         "Haltershow",
                         ""});
-#line 125
+#line 126
  testRunner.Then("i expect exact the following result of showevents", ((string)(null)), table11, "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -560,15 +576,15 @@ this.FeatureBackground();
         public virtual void DeleteAnExistingShowevent()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Delete an existing showevent", ((string[])(null)));
-#line 131
+#line 132
 this.ScenarioSetup(scenarioInfo);
 #line 7
 this.FeatureBackground();
-#line 132
-   testRunner.When("i perform a \'DELETE\'  on  \'Test 2017_2017-03-01\' to webservice \'showevents\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 133
-   testRunner.Then("i expect status \'OK\' with code 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+   testRunner.When("i perform a \'DELETE\'  on  \'Assen 2017_2017-05-01\' to webservice \'showevents\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 134
+   testRunner.Then("i expect status \'OK\' with code 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 135
    testRunner.When("i perform a \'GET\' on webservice \'showevents\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
             TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
@@ -580,14 +596,6 @@ this.FeatureBackground();
                         "shows",
                         "participants"});
             table12.AddRow(new string[] {
-                        "Assen 2017",
-                        "2017-05-01",
-                        "2017-04-01",
-                        "Assen",
-                        "Rob Bettinson",
-                        "Haltershow, Fleeceshow",
-                        ""});
-            table12.AddRow(new string[] {
                         "Boekel 2017",
                         "2017-06-01",
                         "2017-05-01",
@@ -595,7 +603,15 @@ this.FeatureBackground();
                         "judge X",
                         "Haltershow",
                         ""});
-#line 135
+            table12.AddRow(new string[] {
+                        "Test 2017",
+                        "2017-03-01",
+                        "2017-02-15",
+                        "Testlocatie",
+                        "jury Z",
+                        "Haltershow, Male progeny show",
+                        ""});
+#line 136
  testRunner.Then("i expect exact the following result of showevents", ((string)(null)), table12, "Then ");
 #line hidden
             this.ScenarioCleanup();

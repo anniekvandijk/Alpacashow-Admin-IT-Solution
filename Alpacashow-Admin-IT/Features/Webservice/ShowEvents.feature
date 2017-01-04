@@ -6,19 +6,20 @@
 
 Background: The showevents that are present
 	Given the following showevents are present
-   | name        | date       | closeDate  | location | judge         | shows                  | participants |
-   | Assen 2017  | 2017-05-01 | 2017-04-01 | Assen    | Rob Bettinson | Haltershow, Fleeceshow |              |
-   | Boekel 2017 | 2017-06-01 | 2017-05-01 | Boekel   | judge X       | Haltershow             |              | 
+   | name        | date       | closeDate  | location   | judge         | shows                         | participants |
+   | Assen 2017  | 2017-05-01 | 2017-04-01 | Assen      | Rob Bettinson | Haltershow, Fleeceshow        |              |
+   | Boekel 2017 | 2017-06-01 | 2017-05-01 | Boekel     | judge X       | Haltershow                    |              |
+   | Test 2017   | 2017-03-01 | 2017-02-15 | Testlocatie| jury Z        | Haltershow, Male progeny show |              | 
          
 Scenario: Get exact all showevents
    When i perform a 'GET' on webservice 'showevents'
    Then i expect status 'OK' with code 200
-	And i expect exact the following result of showevents
-   | name        | date       | closeDate  | location | judge         | shows                  | participants |
-   | Boekel 2017 | 2017-06-01 | 2017-05-01 | Boekel   | judge X       | Haltershow             |              |
-   | Assen 2017  | 2017-05-01 | 2017-04-01 | Assen    | Rob Bettinson | Haltershow, Fleeceshow |              |
+   And i expect exact the following result of showevents
+   | name        | date       | closeDate  | location   | judge         | shows                         | participants |
+   | Assen 2017  | 2017-05-01 | 2017-04-01 | Assen      | Rob Bettinson | Haltershow, Fleeceshow        |              |
+   | Boekel 2017 | 2017-06-01 | 2017-05-01 | Boekel     | judge X       | Haltershow                    |              |
+   | Test 2017   | 2017-03-01 | 2017-02-15 | Testlocatie| jury Z        | Haltershow, Male progeny show |              | 
 
-  
 Scenario: Get specific showevent
    When i perform a 'GET' for 'Boekel 2017_2017-06-01' on webservice 'showevents'
    Then i expect status 'OK' with code 200
@@ -30,14 +31,14 @@ Scenario: Post new showevent
    When i perform a 'POST' on webservice 'showevents'
    """
 {
-  "name": "Test 2017",
-  "date": "2017-03-01",
-  "closeDate": "2017-02-15",
-  "location": "Test",
-  "judge": "judge Y",
+  "name": "Hapert 2018",
+  "date": "2018-02-12",
+  "closeDate": "2018-01-10",
+  "location": "Hapert",
+  "judge": "judge bla",
   "shows": [
     {
-      "showType": "Male progeny show"
+      "showType": "Female progeny show"
     }
   ]
 }
@@ -45,27 +46,27 @@ Scenario: Post new showevent
    Then i expect status 'OK' with code 200
    When i perform a 'GET' on webservice 'showevents'
 	Then i expect exact the following result of showevents
-   | name        | date       | closeDate  | location | judge         | shows                  | participants |
-   | Assen 2017  | 2017-05-01 | 2017-04-01 | Assen    | Rob Bettinson | Haltershow, Fleeceshow |              |
-   | Boekel 2017 | 2017-06-01 | 2017-05-01 | Boekel   | judge X       | Haltershow             |              |
-   | Test 2017   | 2017-03-01 | 2017-02-15 | Test     | judge Y       | Male progeny show      |              |   
+   | name        | date       | closeDate  | location   | judge         | shows                         | participants |
+   | Assen 2017  | 2017-05-01 | 2017-04-01 | Assen      | Rob Bettinson | Haltershow, Fleeceshow        |              |
+   | Boekel 2017 | 2017-06-01 | 2017-05-01 | Boekel     | judge X       | Haltershow                    |              |
+   | Test 2017   | 2017-03-01 | 2017-02-15 | Testlocatie| jury Z        | Haltershow, Male progeny show |              | 
+   | Hapert 2018 | 2018-02-12 | 2018-01-10 | Hapert     | judge bla     | Female progeny show			|              | 
 
 Scenario: Get all showevents but at least one with all values
    When i perform a 'GET' on webservice 'showevents'
    Then i expect status 'OK' with code 200
 	And i expect at least the following result of showevents
    | name       | date       | closeDate  | location | judge         | shows                  | participants |
-   | Test 2017  | 2017-03-01 | 2017-02-15 | Test     | judge Y       | Male progeny show      |              |
    | Assen 2017 | 2017-05-01 | 2017-04-01 | Assen    | Rob Bettinson | Haltershow, Fleeceshow |              |      
 
 Scenario: Get all showevents with specific value
    When i perform a 'GET' on webservice 'showevents'
    Then i expect status 'OK' with code 200
 	And i expect exact the following specific results of showevents
-   | name        | date       | closeDate  | location |
-   | Test 2017   | 2017-03-01 | 2017-02-15 | Test     |
-   | Assen 2017  | 2017-05-01 | 2017-04-01 | Assen    |
-   | Boekel 2017 | 2017-06-01 | 2017-05-01 | Boekel   |      
+   | name        | date       | closeDate  | location    |
+   | Assen 2017  | 2017-05-01 | 2017-04-01 | Assen       |
+   | Boekel 2017 | 2017-06-01 | 2017-05-01 | Boekel      |
+   | Test 2017   | 2017-03-01 | 2017-02-15 | Testlocatie |
 
 Scenario: Get all showevents but at least one with specific value
    When i perform a 'GET' on webservice 'showevents'
@@ -129,12 +130,12 @@ Scenario: Change excisting showevent with multiline text
    | Test 2017   | 2017-03-01 | 2017-02-15 | Test wijziging locatie | judge Y       | Haltershow             |              |  
 
 Scenario: Delete an existing showevent
-   When i perform a 'DELETE'  on  'Test 2017_2017-03-01' to webservice 'showevents'
+   When i perform a 'DELETE'  on  'Assen 2017_2017-05-01' to webservice 'showevents'
    Then i expect status 'OK' with code 200
    When i perform a 'GET' on webservice 'showevents'
 	Then i expect exact the following result of showevents
-   | name        | date       | closeDate  | location | judge         | shows                  | participants |
-   | Assen 2017  | 2017-05-01 | 2017-04-01 | Assen    | Rob Bettinson | Haltershow, Fleeceshow |              |
-   | Boekel 2017 | 2017-06-01 | 2017-05-01 | Boekel   | judge X       | Haltershow             |              | 
+   | name        | date       | closeDate  | location    | judge   | shows                         | participants |
+   | Boekel 2017 | 2017-06-01 | 2017-05-01 | Boekel      | judge X | Haltershow                    |              |
+   | Test 2017   | 2017-03-01 | 2017-02-15 | Testlocatie | jury Z  | Haltershow, Male progeny show |              |
 
    

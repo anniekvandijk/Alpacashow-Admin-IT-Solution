@@ -75,6 +75,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Actions\ShoweventsActions.cs" />
     <Compile Include="Actions\WebserviceActions.cs" />
     <Compile Include="Configuration\Hooks.cs" />
     <Compile Include="Configuration\AppSettings.cs" />
