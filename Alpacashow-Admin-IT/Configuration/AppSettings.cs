@@ -10,23 +10,36 @@ namespace Alpacashow_Admin_IT.Configuration
    public class AppSettings
    {
 
-      public static string getEnvironmentUrl ()
+      public static string getWebserviceUrl ()
       {
          var actEnv = GetActiveEnvironment();
          if (actEnv == "Local")
          {
-            return ConfigurationManager.AppSettings["LocalUrl"];
+            return ConfigurationManager.AppSettings["LocalWebserviceUrl"];
          }
          if (actEnv == "Docker")
          {
-            return ConfigurationManager.AppSettings["DockerUrl"];
+            return ConfigurationManager.AppSettings["DockerWebserviceUrl"];
          } else
          {
             throw new SettingsPropertyNotFoundException("No settings for ActiveEnvironment '" + actEnv + "'");
          }
       }
 
-      public static string GetActiveEnvironment ()
+        public static string getFrontendUrl()
+        {
+            var actEnv = GetActiveEnvironment();
+            if (actEnv == "Local")
+            {
+                return ConfigurationManager.AppSettings["LocalFrontendUrl"];
+            }
+            else
+            {
+                throw new SettingsPropertyNotFoundException("No settings for ActiveEnvironment '" + actEnv + "'");
+            }
+        }
+
+        public static string GetActiveEnvironment ()
       {
          return ConfigurationManager.AppSettings["ActiveEnvironment"];
       }

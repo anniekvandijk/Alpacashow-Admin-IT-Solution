@@ -71,7 +71,7 @@ namespace Alpacashow_Admin_SpecflowTests.StepDefinitions
 
        private static void SentRequest(string key, string path, StringContent content, string HttpMethod)
        {
-          var settings = FeatureContext.Current["environment-settings"];
+          var settings = FeatureContext.Current["webservice-url"];
           HttpResponseMessage response = null;
           var client = new HttpClient();
           client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));

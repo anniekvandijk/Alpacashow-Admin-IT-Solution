@@ -1,21 +1,59 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.IO;
+using System.Net.Http;
 using Alpacashow_Admin_SpecflowTests.Actions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 using Alpacashow_Admin_SpecflowTests.Utilities;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
 
 namespace Alpacashow_Admin_SpecflowTests.StepDefinitions
 {
    [Binding]
    public class ShoweventsSteps
    {
-      [Given(@"the following showevents are present")]
+        IWebDriver _driver;
+        private static readonly string _projectDir = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+
+        [AfterScenario]
+        public void AfterScenario()
+        {
+            //_driver.Dispose();
+        }
+
+        [Given(@"de volgende showevents zijn aanwezig")]
+        [Given(@"the following showevents are present")]
       public void ShoweventsPresent(Table table)
       {
           ShoweventsActions.CreateShowevents(table);
       }
+
+        // Frontend-steps
+
+        [When(@"ik naar de pagina 'showevents' ga")]
+        public void AlsIkNaarDePaginaGa()
+        {
+            string frontendUrl = (string) FeatureContext.Current["frontend-url"];
+            _driver = new ChromeDriver(_projectDir + @"\Alpacashow-Admin-IT\Drivers");
+            _driver.Manage().Window.Maximize();
+            ScenarioContext.Current["driver"] = _driver;
+            _driver.Navigate().GoToUrl(frontendUrl);
+            _driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(10));
+            _driver.FindElement(By.LinkText("Alpacashows")).Click();
+
+        }
+
+        [Then(@"verwacht ik de volgende showevents")]
+        public void DanVerwachtIkDeVolgendeShowevents(Table table)
+        {
+            ScenarioContext.Current.Pending();
+        }
+
+
+        // Webservice steps
 
       [Then(@"i expect exact the following result of showevents")]
       public void ExactShoweventResult(Table expectedShoweventsTable)

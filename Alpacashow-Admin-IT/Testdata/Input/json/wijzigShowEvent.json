@@ -4,10 +4,6 @@
   "closeDate": "2017-01-15",
   "location": "Test",
   "judge": "judge Y",
-  "participants": [],
-  "shows": [
-    {
-      "showType": "Haltershow"
-    }
-  ]
+  "participants": [ ],
+  "showType": "Haltershow"
 }
