@@ -21,7 +21,7 @@ Scenario: Get exact all showevents
    | Test 2017   | 2017-03-01 | 2017-02-15 | Testlocatie | jury Z        | Male progeny show |              |
 
 Scenario: Get specific showevent
-   When i perform a 'GET' for 'Boekel 2017_2017-06-01' on webservice 'showevents'
+   When i perform a 'GET' for '2017-06-01_HALTERSHOW' on webservice 'showevents'
    Then i expect status 'OK' with code 200
    And i expect exact the following result of showevents
    | name        | date       | closeDate  | location | judge   | showType   | participants |
@@ -74,7 +74,7 @@ Scenario: Post new showevent
 
 
 Scenario: Change excisting showevent with table
-   When i perform a 'PUT' for the following change on 'Test 2017_2017-03-01' to webservice 'showevents'
+   When i perform a 'PUT' for the following change on '2017-03-01_MALE_PROGENY_SHOW' to webservice 'showevents'
    | parameter | value      |
    | name      | Test 2017  |
    | date      | 2017-03-01 |
@@ -91,7 +91,7 @@ Scenario: Change excisting showevent with table
    | Test 2017   | 2017-03-01 | 2017-02-15 | Teslocatie | jury Z        | Haltershow |              | 
 
 Scenario: Change excisting showevent with file
-   When i perform a 'PUT' with file 'wijzigShowEvent' on 'Test 2017_2017-03-01' to webservice 'showevents'
+   When i perform a 'PUT' with file 'wijzigShowEvent' on '2017-03-01_MALE_PROGENY_SHOW' to webservice 'showevents'
    Then i expect status 'OK' with code 200
    When i perform a 'GET' on webservice 'showevents'
 	Then i expect exact the following result of showevents
@@ -101,7 +101,7 @@ Scenario: Change excisting showevent with file
    | Test 2017   | 2017-03-01 | 2017-01-15 | Test     | judge Y       | Haltershow |              |  
 
 Scenario: Change excisting showevent with multiline text
-   When i perform a 'PUT' for the following Json change on 'Test 2017_2017-03-01' to webservice 'showevents'
+   When i perform a 'PUT' for the following Json change on '2017-03-01_MALE_PROGENY_SHOW' to webservice 'showevents'
    """
 {
   "name": "Test 2017",
@@ -122,7 +122,7 @@ Scenario: Change excisting showevent with multiline text
    | Test 2017   | 2017-03-01 | 2017-02-15 | Test wijziging locatie | judge Y       | Haltershow |              |  
 
 Scenario: Delete an existing showevent
-   When i perform a 'DELETE'  on  'Assen 2017_2017-05-01' to webservice 'showevents'
+   When i perform a 'DELETE'  on  '2017-05-01_FLEECESHOW' to webservice 'showevents'
    Then i expect status 'OK' with code 200
    When i perform a 'GET' on webservice 'showevents'
 	Then i expect exact the following result of showevents
@@ -131,11 +131,11 @@ Scenario: Delete an existing showevent
    | Test 2017   | 2017-03-01 | 2017-02-15 | Testlocatie | jury Z  | Male progeny show |              |
 
 Scenario: Get not existing showevent
-   When i perform a 'GET' for 'Boekel 2018_2017-06-01' on webservice 'showevents'
+   When i perform a 'GET' for '2017-06-01' on webservice 'showevents'
    Then i expect status 'Not Found' with code 404
 
 Scenario: Change non existing excisting showevent
-   When i perform a 'PUT' with file 'wijzigShowEvent' on 'Test 2018_2017-03-01' to webservice 'showevents'
+   When i perform a 'PUT' with file 'wijzigShowEvent' on 'MALE_PROGENY_SHOW' to webservice 'showevents'
    Then i expect status 'Not Found' with code 404
 
 Scenario: Delete non existing showevent
@@ -157,7 +157,7 @@ Scenario: Post showevent with non excisting showtype
    Then i expect status 'Bad Request' with code 400
 
 Scenario: Change excisting showevent with wrong date format
-   When i perform a 'PUT' for the following Json change on 'Test 2017_2017-03-01' to webservice 'showevents'
+   When i perform a 'PUT' for the following Json change on '2017-03-01_MALE_PROGENY_SHOW' to webservice 'showevents'
    """
 {
   "name": "Test 2017",

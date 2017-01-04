@@ -173,7 +173,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 7
 this.FeatureBackground();
 #line 24
-   testRunner.When("i perform a \'GET\' for \'Boekel 2017_2017-06-01\' on webservice \'showevents\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+   testRunner.When("i perform a \'GET\' for \'2017-06-01_HALTERSHOW\' on webservice \'showevents\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 25
    testRunner.Then("i expect status \'OK\' with code 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
@@ -406,8 +406,8 @@ this.FeatureBackground();
                         "showType",
                         "Haltershow"});
 #line 77
-   testRunner.When("i perform a \'PUT\' for the following change on \'Test 2017_2017-03-01\' to webservic" +
-                    "e \'showevents\'", ((string)(null)), table8, "When ");
+   testRunner.When("i perform a \'PUT\' for the following change on \'2017-03-01_MALE_PROGENY_SHOW\' to w" +
+                    "ebservice \'showevents\'", ((string)(null)), table8, "When ");
 #line 85
    testRunner.Then("i expect status \'OK\' with code 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 86
@@ -462,8 +462,8 @@ this.ScenarioSetup(scenarioInfo);
 #line 7
 this.FeatureBackground();
 #line 94
-   testRunner.When("i perform a \'PUT\' with file \'wijzigShowEvent\' on \'Test 2017_2017-03-01\' to webser" +
-                    "vice \'showevents\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+   testRunner.When("i perform a \'PUT\' with file \'wijzigShowEvent\' on \'2017-03-01_MALE_PROGENY_SHOW\' t" +
+                    "o webservice \'showevents\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 95
    testRunner.Then("i expect status \'OK\' with code 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 96
@@ -519,8 +519,8 @@ this.ScenarioSetup(scenarioInfo);
 this.FeatureBackground();
 #line hidden
 #line 104
-   testRunner.When("i perform a \'PUT\' for the following Json change on \'Test 2017_2017-03-01\' to webs" +
-                    "ervice \'showevents\'", "{\r\n\"name\": \"Test 2017\",\r\n\"date\": \"2017-03-01\",\r\n\"closeDate\": \"2017-02-15\",\r\n\"loca" +
+   testRunner.When("i perform a \'PUT\' for the following Json change on \'2017-03-01_MALE_PROGENY_SHOW\'" +
+                    " to webservice \'showevents\'", "{\r\n\"name\": \"Test 2017\",\r\n\"date\": \"2017-03-01\",\r\n\"closeDate\": \"2017-02-15\",\r\n\"loca" +
                     "tion\": \"Test wijziging locatie\",\r\n\"judge\": \"judge Y\",\r\n\"participants\": [],\r\n\"sho" +
                     "wType\":  \"Haltershow\"\r\n}", ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 116
@@ -577,7 +577,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 7
 this.FeatureBackground();
 #line 125
-   testRunner.When("i perform a \'DELETE\'  on  \'Assen 2017_2017-05-01\' to webservice \'showevents\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+   testRunner.When("i perform a \'DELETE\'  on  \'2017-05-01_FLEECESHOW\' to webservice \'showevents\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 126
    testRunner.Then("i expect status \'OK\' with code 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 127
@@ -624,7 +624,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 7
 this.FeatureBackground();
 #line 134
-   testRunner.When("i perform a \'GET\' for \'Boekel 2018_2017-06-01\' on webservice \'showevents\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+   testRunner.When("i perform a \'GET\' for \'2017-06-01\' on webservice \'showevents\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 135
    testRunner.Then("i expect status \'Not Found\' with code 404", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
@@ -642,8 +642,8 @@ this.ScenarioSetup(scenarioInfo);
 #line 7
 this.FeatureBackground();
 #line 138
-   testRunner.When("i perform a \'PUT\' with file \'wijzigShowEvent\' on \'Test 2018_2017-03-01\' to webser" +
-                    "vice \'showevents\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+   testRunner.When("i perform a \'PUT\' with file \'wijzigShowEvent\' on \'MALE_PROGENY_SHOW\' to webservic" +
+                    "e \'showevents\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 139
    testRunner.Then("i expect status \'Not Found\' with code 404", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
@@ -700,8 +700,8 @@ this.ScenarioSetup(scenarioInfo);
 this.FeatureBackground();
 #line hidden
 #line 160
-   testRunner.When("i perform a \'PUT\' for the following Json change on \'Test 2017_2017-03-01\' to webs" +
-                    "ervice \'showevents\'", "{\r\n\"name\": \"Test 2017\",\r\n\"date\": \"01-03-2017\",\r\n\"closeDate\": \"2017-02-15\",\r\n\"loca" +
+   testRunner.When("i perform a \'PUT\' for the following Json change on \'2017-03-01_MALE_PROGENY_SHOW\'" +
+                    " to webservice \'showevents\'", "{\r\n\"name\": \"Test 2017\",\r\n\"date\": \"01-03-2017\",\r\n\"closeDate\": \"2017-02-15\",\r\n\"loca" +
                     "tion\": \"Test wijziging locatie\",\r\n\"judge\": \"judge Y\",\r\n\"participants\": [],\r\n\"sho" +
                     "wType\": \"Haltershow\"\r\n}", ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 172
